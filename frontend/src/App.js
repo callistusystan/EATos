@@ -4,6 +4,8 @@ import InventoryPage from './pages/InventoryPage';
 import CalTestPage from './pages/CalTestPage';
 import MarketPlacePage from './pages/Market';
 import ScanPage from './pages/ScanPage';
+import UploadImagePage from './pages/UploadImagePage';
+import ProfilePage from './pages/ProfilePage'
 import MobileHackathon from './components/react-mobile-hackathon';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,7 +31,10 @@ class App extends Component {
                     <Route path='/caltest' component={CalTestPage} />
                     <Route path='/inventory' component={InventoryPage} />
                     <Route path='/market' component={MarketPlacePage} />
-                    <Route path='/scanpage' component={ScanPage} />
+                    <Route path='/scan' component={ScanPage} />
+                    <Route path='/profile/:uid' component={ProfilePage} />
+                    <Route path='/profile' component={ProfilePage} />
+                    <Route path='/UploadImagePage' component={UploadImagePage} />
                     <Route path='/' component={HomePage} />
                 </Switch>
 

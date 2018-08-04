@@ -54,7 +54,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth hintText={'Enter price'}/>
+                        <TextField fullWidth label={'Enter price'}/>
                     </div>
 
                     <div

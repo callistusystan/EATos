@@ -3,17 +3,42 @@ import DeviceBar from '../components/react-mobile-hackathon/devices/DeviceBar';
 import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView';
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
 import {GridLoader} from 'react-spinners';
-import Background from '../images/background.jpg';
+import ImageCompressor from "image-compressor.js"
 import Fade from "@material-ui/core/Fade/Fade"
 import { Link } from 'react-router-dom';
 import BackIcon from "../images/back.svg"
+import UserIcon from "../images/User-icon.svg"
+
 
 
 class HomePage extends Component {
 
     state = {
-        ready: false
+        ready: false,
+        base64data: null
     };
+
+    compressImage = image => {
+        if(typeof(image) !== typeof new Blob()){
+            return
+        }
+        const imageCompressor = new ImageCompressor();
+        imageCompressor.compress(image,{
+            maxHeight:320,
+            maxWidth:320,
+        }).then(compressedImage=>{
+            const reader = new FileReader();
+            reader.readAsDataURL(compressedImage);
+            reader.onloadend = () => {
+                const base64data = reader.result;
+                this.setState({base64data:base64data})
+            }
+        })
+    }
+
+    handleUpload = () => {
+        //handle upload
+    }
 
     componentDidMount() {
         setTimeout(() => this.setState({ready: true}), 1000);
@@ -33,13 +58,14 @@ class HomePage extends Component {
         return (
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                    {this.state.base64data&&<Fade in timeout={500}><img src={this.state.base64data} style={{width:"90%",height:"auto",marginTop:100}} alt=""/></Fade>}
                     <Fade in timeout={200}>
-                        <button
+                        <div
                             className={'bluepurple'}
                             style={{
                                 width: "90%",
                                 minHeight: 100,
-                                flex:1,
+                                height:100,
                                 display: "flex",
                                 borderRadius: 5,
                                 marginTop:10,
@@ -50,30 +76,29 @@ class HomePage extends Component {
                                 textDecoration:"none"
                             }}
                         >
-                            <h1>Scan QR</h1>
-                        </button>
+                            <input type="file" onChange={e=>this.compressImage(e.target.files[0])} accept="image/*"/>
+                        </div>
                     </Fade>
-                    <Fade in timeout={400}>
-                        <button
-                            className={'bluegreen'}
-                            style={{
-                                width: "90%",
-                                minHeight: 100,
-                                flex:1,
-                                display: "flex",
-                                borderRadius: 5,
-                                marginTop: 5,
-                                marginBottom: 5,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                color: "#fff",
-                                textDecoration:"none"
-
-                            }}
-                        >
-                            <h1>Scan Item</h1>
-                        </button>
-                    </Fade>
+                    <button
+                        disabled={this.state.base64data}
+                        className={'orangeyellow'}
+                        style={{
+                            width: "90%",
+                            transition:'1s',
+                            height:this.state.base64data?100:0,
+                            display: "flex",
+                            borderRadius: 5,
+                            marginTop:10,
+                            marginBottom:5,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "#fff",
+                            textDecoration:"none"
+                        }}
+                        onClick={()=>this.handleUpload()}
+                    >
+                        {this.state.base64data?<h3>Upload</h3>:undefined}
+                    </button>
                     {/*<Fade in timeout={800}>*/}
                     {/*<Link*/}
                     {/*to={'/'}*/}
@@ -120,9 +145,11 @@ class HomePage extends Component {
                             <img src={BackIcon} width={25} height={25} alt=""/>
                         </Link>
                     </div>
-                    <span style={{fontSize: 30, justifySelf: "center"}}>Scan</span>
+                    <span style={{fontSize: 30, justifySelf: "center"}}>Upload Image</span>
                     <div style={{flex: 1}}></div>
                 </div>
+
+
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
                 {/*<DeviceBar*/}
                 {/*title='Something'*/}

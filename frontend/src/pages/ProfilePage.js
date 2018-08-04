@@ -7,6 +7,7 @@ import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
 import { Link } from 'react-router-dom';
 import BackIcon from "../images/back.svg"
+import UserIcon from "../images/User-icon.svg"
 
 
 class HomePage extends Component {
@@ -33,13 +34,14 @@ class HomePage extends Component {
         return (
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                    <img src={UserIcon} style={{width:200,height:200,marginTop:100}} alt=""/>
                     <Fade in timeout={200}>
                         <button
                             className={'bluepurple'}
                             style={{
                                 width: "90%",
                                 minHeight: 100,
-                                flex:1,
+                                height:100,
                                 display: "flex",
                                 borderRadius: 5,
                                 marginTop:10,
@@ -50,28 +52,7 @@ class HomePage extends Component {
                                 textDecoration:"none"
                             }}
                         >
-                            <h1>Scan QR</h1>
-                        </button>
-                    </Fade>
-                    <Fade in timeout={400}>
-                        <button
-                            className={'bluegreen'}
-                            style={{
-                                width: "90%",
-                                minHeight: 100,
-                                flex:1,
-                                display: "flex",
-                                borderRadius: 5,
-                                marginTop: 5,
-                                marginBottom: 5,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                color: "#fff",
-                                textDecoration:"none"
-
-                            }}
-                        >
-                            <h1>Scan Item</h1>
+                            <h1>Your name is {uid||'Jeff'}</h1>
                         </button>
                     </Fade>
                     {/*<Fade in timeout={800}>*/}
@@ -120,7 +101,7 @@ class HomePage extends Component {
                             <img src={BackIcon} width={25} height={25} alt=""/>
                         </Link>
                     </div>
-                    <span style={{fontSize: 30, justifySelf: "center"}}>Scan</span>
+                    <span style={{fontSize: 30, justifySelf: "center"}}>Profile</span>
                     <div style={{flex: 1}}></div>
                 </div>
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
