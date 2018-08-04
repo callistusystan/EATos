@@ -1,0 +1,36 @@
+cleos wallet unlock --password <password>
+
+cleos create account eosio food.ctr EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+cleos create account eosio cal EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+cleos create account eosio evelyn EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+cd ./food_contract
+
+eosiocpp -o food_contract.wast food_contract.cpp
+eosiocpp -g food_contract.abi food_contract.cpp
+
+cd ..
+
+cleos set contract food.ctr ./food_contract -p food.ctr@active
+
+cleos push action food.ctr createacc '["cal"]' -p cal
+
+cleos push action food.ctr createacc '["evelyn"]' -p evelyn
+
+cleos push action food.ctr createfood '["cal", 123, "apple", "2018-08-04", 100, "apples", 600]' -p cal
+
+cleos push action food.ctr createsale '["cal", 0, 1, 123, 5, 400, "My awesome apples"]' -p cal
+
+cleos push action food.ctr setfoodowner '["cal", "evelyn", 123, 4, 1, 0]' -p cal -p evelyn
+
+cleos get table food.ctr evelyn foods
+
+cleos push action food.ctr createsale '["evelyn", 1, 1, 123, 3, 200, "My very awesome apples"]' -p evelyn
+
+cleos push action food.ctr setfoodowner '["evelyn", "cal", 123, 1, 1, 1]' -p cal -p evelyn
+
+cleos get table food.ctr food.ctr sales
+
+cleos get table food.ctr evelyn foods
