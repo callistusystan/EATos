@@ -104,7 +104,7 @@ class ItemBlock extends React.Component {
                                 alignItems: "center",
                                 border:"1.5px solid #5d1ebe"
                             }}
-                                    onClick={()=>this.props.handleOnSell('Free range extra large eggs')}
+                                    onClick={()=>this.props.handler(food_name,units,price,seller)}
                             >
                                 <img src={SausagePurple} style={{width: 25, height: 25}} alt=""/>
                                 <span style={{marginLeft:5,color:"#5d1ebe"}}>Claim</span>
