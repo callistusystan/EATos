@@ -15,7 +15,7 @@ import Img from 'react-image';
 import Processed from '../images/processed.png';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
-const socket = io('http://localhost:3300');
+
 
 const FOOD = [
     {
@@ -83,7 +83,17 @@ class HomePage extends Component {
             food: FOOD.map(f => ({ ...f, curOwner: this.props.profile.name }))
         };
 
-        socket.emit('getSales', {});
+
+    }
+
+    componentDidMount(){
+        setTimeout(() => this.setState({ready: true}), 1000);
+        this.socket = io('http://localhost:3300');
+        this.socket.emit('getSales', {});
+    }
+
+    componentWillUnmount(){
+        this.socket.close()
     }
 
     compressImage = image => {
@@ -107,10 +117,6 @@ class HomePage extends Component {
     handleUpload = () => {
         //handle upload
         console.log(this.state.base64data)
-    }
-
-    componentDidMount() {
-        setTimeout(() => this.setState({ready: true}), 1000);
     }
 
     renderLoading = () => {
@@ -187,7 +193,7 @@ class HomePage extends Component {
                                 this.setState({processing: false, processed: true});
                                 this.state.food.forEach(food => {
                                     console.log('emitting', food);
-                                    socket.emit('createFood', food);
+                                    this.socket.emit('createFood', food);
                                 });
                             }, 2000);
                         }}
