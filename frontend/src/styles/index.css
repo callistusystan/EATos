@@ -91,6 +91,11 @@
     background:linear-gradient(45deg, rgb(245, 248, 255) 0%, rgb(255, 221, 72));
 }
 
+.realbluegreen{
+    background:linear-gradient(45deg, rgb(72, 255, 128) 0%, rgb(67, 52, 255));
+}
+
+
 .darkbluepurp{
     background:linear-gradient(45deg, rgb(33, 31, 88) 0%, rgb(83, 75, 125));
 }

@@ -76,7 +76,7 @@ class HomePage extends Component {
                     <Fade in timeout={600}>
                     <Link
                         to={'market'}
-                        className={'orangeyellow'}
+                        className={'realbluegreen'}
                         style={{
                             width: "90%",
                             minHeight: 100,
@@ -84,7 +84,7 @@ class HomePage extends Component {
                             display: "flex",
                             borderRadius: 5,
                             marginTop: 5,
-                            marginBottom: 15,
+                            marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -95,25 +95,28 @@ class HomePage extends Component {
                         <h1>Market Place</h1>
                     </Link>
                     </Fade>
-                    {/*<Fade in timeout={800}>*/}
-                    {/*<Link*/}
-                        {/*to={'/'}*/}
-                        {/*className={'whiteyellow'}*/}
-                        {/*style={{*/}
-                            {/*minHeight: 100,*/}
-                            {/*flex:1,*/}
-                            {/*width: "90%",*/}
-                            {/*display: "flex",*/}
-                            {/*borderRadius: 5,*/}
-                            {/*marginTop: 5,*/}
-                            {/*marginBottom: 5,*/}
-                            {/*textDecoration:"none"*/}
+                    <Fade in timeout={600}>
+                        <Link
+                            to={'profile'}
+                            className={'orangeyellow'}
+                            style={{
+                                width: "90%",
+                                minHeight: 100,
+                                flex:1,
+                                display: "flex",
+                                borderRadius: 5,
+                                marginTop: 5,
+                                marginBottom: 15,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "#fff",
+                                textDecoration:"none"
 
-                        {/*}}*/}
-                    {/*>*/}
-
-                    {/*</Link>*/}
-                    {/*</Fade>*/}
+                            }}
+                        >
+                            <h1>My Profile</h1>
+                        </Link>
+                    </Fade>
                 </div>
             </ScrollView>
         );
