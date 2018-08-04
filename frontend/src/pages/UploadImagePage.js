@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
-import DeviceBar from '../components/react-mobile-hackathon/devices/DeviceBar';
 import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView';
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
 import {GridLoader} from 'react-spinners';
 import ImageCompressor from "image-compressor.js"
 import Fade from "@material-ui/core/Fade/Fade"
 import { Link } from 'react-router-dom';
-import BackIcon from "../images/back.svg"
-import UserIcon from "../images/User-icon.svg"
 import TopBar from "../components/TopBar";
 import { Button, CircularProgress } from '@material-ui/core';
 import { PhotoCamera } from '@material-ui/icons';
-import Img from 'react-image';
 import Processed from '../images/processed.png';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';

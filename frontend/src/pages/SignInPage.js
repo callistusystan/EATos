@@ -19,12 +19,14 @@ class SignInPage extends Component {
     };
 
     componentDidMount() {
+
         setTimeout(() => this.setState({ready: true}), 1000);
         this.socket = openSocket('http://172.16.96.85:3300');
     }
 
     componentWillUnmount(){
         this.socket.close()
+
     }
 
     renderLoading = () => {

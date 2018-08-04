@@ -1,6 +1,4 @@
 import React from "react"
-import {Dialog} from "@material-ui/core"
-import DialogContent from '@material-ui/core/DialogContent';
 import TextField from "@material-ui/core/es/TextField/TextField";
 
 

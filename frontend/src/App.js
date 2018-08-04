@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import HomePage from './pages/HomePage';
 import InventoryPage from './pages/InventoryPage';
 import MarketPlacePage from './pages/Market';
-import ScanPage from './pages/ScanPage';
 import UploadImagePage from './pages/UploadImagePage';
 import ProfilePage from './pages/ProfilePage'
 import MobileHackathon from './components/react-mobile-hackathon';

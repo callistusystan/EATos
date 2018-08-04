@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
-import DeviceBar from '../components/react-mobile-hackathon/devices/DeviceBar';
 import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView';
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
 import {GridLoader} from 'react-spinners';
-import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
 import { Link,withRouter } from 'react-router-dom';
 import QR from "../images/qrcode.svg"
 import fridge from '../images/fridge.svg'
 import shop from '../images/shopping-basket (1).svg'
 import users from '../images/users.svg'
-import Logo from "../components/Logo"
 import TopBar from '../components/TopBar';
 import { connect } from 'react-redux';
 
