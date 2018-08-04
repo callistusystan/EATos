@@ -18,14 +18,17 @@ const eos = EOS(EOS_CONFIG.clientConfig);
 var port = process.env.PORT || 3300;
 
 var SALES = [];
+var NAME_TO_SOCKET = {};
 
-io.on('connection', function(client) {
-    client.emit('getSales', sales);
+getSales();
+
+io.on('connection', client => {
+    client.emit('getSales', SALES);
+    client.on('createAcc', createAcc);
 });
 
 io.on('getFoods', getFoods);
 io.on('getSales', getSales);
-io.on('createAcc', createAcc);
 io.on('createSale', createSale);
 io.on('processTransaction', processTransaction);
 
@@ -36,7 +39,7 @@ function getFoods(accountName) {
         table:'foods',
         json: true,
     }).then(({ rows }) => {
-        io.emit('getFoods', rows);
+        NAME_TO_SOCKET[accountName].emit('getFoods', rows);
     });
 }
 
@@ -48,11 +51,13 @@ function getSales() {
         json: true,
     }).then(({ rows }) => {
         SALES = rows;
+        console.log('GOT SALES', SALES);
         io.emit('getSales', rows);
     });
 }
 
-function createAcc(accountName){
+function createAcc(accountName, callback) {
+    console.log('createAcc', accountName);
     eos.transaction(tr => {
         tr.newaccount({
             creator: 'eosio',
@@ -77,13 +82,18 @@ function createAcc(accountName){
     }).then(res => {    
         eos.contract(EOS_CONFIG.contractName).then((contract) => {
             contract.createacc(
-                EOS_CONFIG.contractSender,
                 accountName,
-                { authorization: [EOS_CONFIG.contractSender] }
+                { authorization: [accountName] }
             ).then(res => {
-                io.emit('Create New Account', { done: true });
-            })
+                console.log('RES', res);
+                
+                callback(true);
+            }).catch(err => {
+                callback(false);
+            });
         })
+    }).catch(err => {
+        callback(false);
     });
 }
 
@@ -99,9 +109,9 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
                 price, 
                 description
             },
-            { authorization: [EOS_CONFIG.contractSender] }
+            { authorization: [seller] }
         ).then(res => {
-            io.emit('Create Sale', { done: true });
+            getSales();
         });
     });
 }
@@ -117,9 +127,11 @@ function processTransaction({ curOwner, newOwner, qr_code, count, type_of_sale, 
                 type_of_sale,
                 sale_id
             },
-            { authorization: [EOS_CONFIG.contractSender] }
+            { authorization: [curOwner, newOwner] }
         ).then(res => {
-            io.emit('Create Sale', { done: true });
+            getSales();
+            getFoods(curOwner);
+            getFoods(newOwner);
         })
     })
 }
