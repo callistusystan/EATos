@@ -37,7 +37,7 @@ class foodContract : public contract {
   }
   
   // @abi action
-  void createfood(account_name curOwner, uint64_t qr_code, string food_name, string expiry_date, uint32_t count, string units, uint32_t price) {
+  void createfood(account_name curOwner, uint64_t qr_code, string food_name, string expiry_date, string location, string image,uint32_t count, string units, uint32_t price) {
     require_auth(curOwner);
     // Check if curOwner has food
     foodtable curOwnerFoods(_self, curOwner);
@@ -47,6 +47,8 @@ class foodContract : public contract {
       food_record.qr_code = qr_code;
       food_record.food_name = food_name;
       food_record.expiry_date = expiry_date;
+      food_record.location = location;	    
+      food_record.image = image;
       food_record.count = count;
       food_record.units = units;
       food_record.price = price;
@@ -80,6 +82,8 @@ class foodContract : public contract {
       sale_item.prev_owners = itr->prev_owners;
       sale_item.food_name = itr->food_name;
       sale_item.expiry_date = itr->expiry_date;
+      sale_item.location = itr->location;
+      sale_item.image = itr->image;
       sale_item.count = count;
       sale_item.units = itr->units;
       sale_item.price = price;
@@ -135,6 +139,8 @@ class foodContract : public contract {
         food_record.qr_code = curOwnerFoodRecord->qr_code;
         food_record.food_name = curOwnerFoodRecord->food_name;
         food_record.expiry_date = curOwnerFoodRecord->expiry_date;
+	food_record.location = curOwnerFoodRecord->location;      
+	food_record.image = curOwnerFoodRecord->image;
         food_record.count = count;
         food_record.units = units;
         food_record.price = price;
@@ -206,12 +212,14 @@ class foodContract : public contract {
       uint64_t      qr_code;
       string        food_name;
       string        expiry_date;
+      string        location;
+      string        image;
       uint32_t      count;
       string        units;
       uint64_t      price;
 
       auto primary_key() const { return qr_code; }
-      EOSLIB_SERIALIZE(food, (owner)(prev_owners)(qr_code)(food_name)(expiry_date)(count)(units)(price))
+      EOSLIB_SERIALIZE(food, (owner)(prev_owners)(qr_code)(food_name)(expiry_date)(location)(image)(count)(units)(price))
     };
 
     typedef multi_index<N(foods), food> foodtable;
@@ -227,6 +235,8 @@ class foodContract : public contract {
       std::vector<account_name> prev_owners;
       string        food_name;
       string        expiry_date;
+      string        location;
+      string        image;	    
       uint32_t      count;
       string        units;
       uint32_t      price;
@@ -234,7 +244,7 @@ class foodContract : public contract {
 
 
       auto primary_key() const { return sale_id; }
-      EOSLIB_SERIALIZE(sale, (sale_id)(type_of_sale)(seller)(qr_code)(prev_owners)(food_name)(expiry_date)(count)(units)(price)(description))
+      EOSLIB_SERIALIZE(sale, (sale_id)(type_of_sale)(seller)(qr_code)(prev_owners)(food_name)(expiry_date)(location)(image)(count)(units)(price)(description))
     };
 
     typedef multi_index<N(sales), sale> salestable;
