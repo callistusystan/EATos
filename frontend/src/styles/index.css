@@ -66,6 +66,14 @@
 
 .bluepurple{
     background:linear-gradient(45deg,rgb(236, 89, 255) 0%, rgb(75, 63, 245));
+    opacity:1;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c39cf0', endColorstr='#625ff5', GradientType=1 );
+    transition: 0.3s ease;
+}
+
+.bluepurple:hover{
+    background:linear-gradient(45deg, rgb(236, 89, 255) 0%, rgb(75, 63, 245));
+    opacity:0.5;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c39cf0', endColorstr='#625ff5', GradientType=1 );
 }
 

@@ -35,12 +35,13 @@ class HomePage extends Component {
                         to={'/scan'}
                         className={'bluepurple'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
+                            flex:1,
                             display: "flex",
-                            borderRadius: 5,
-                            marginTop:10,
-                            marginBottom:5,
+                            // borderRadius: 5,
+                            // marginTop:10,
+                            // marginBottom:5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -55,12 +56,13 @@ class HomePage extends Component {
                         to={'/inventory'}
                         className={'bluegreen'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
+                            flex:1,
                             display: "flex",
-                            borderRadius: 5,
-                            marginTop: 5,
-                            marginBottom: 5,
+                            // borderRadius: 5,
+                            // marginTop: 5,
+                            // marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -76,12 +78,13 @@ class HomePage extends Component {
                         to={'market'}
                         className={'orangeyellow'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
+                            flex:1,
                             display: "flex",
-                            borderRadius: 5,
-                            marginTop: 5,
-                            marginBottom: 5,
+                            // borderRadius: 5,
+                            // marginTop: 5,
+                            // marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -92,24 +95,25 @@ class HomePage extends Component {
                         <h1>Market Place</h1>
                     </Link>
                     </Fade>
-                    <Fade in timeout={800}>
-                    <Link
-                        to={'/'}
-                        className={'whiteyellow'}
-                        style={{
-                            minHeight: 100,
-                            width: "90%",
-                            display: "flex",
-                            borderRadius: 5,
-                            marginTop: 5,
-                            marginBottom: 5,
-                            textDecoration:"none"
+                    {/*<Fade in timeout={800}>*/}
+                    {/*<Link*/}
+                        {/*to={'/'}*/}
+                        {/*className={'whiteyellow'}*/}
+                        {/*style={{*/}
+                            {/*minHeight: 100,*/}
+                            {/*flex:1,*/}
+                            {/*width: "90%",*/}
+                            {/*display: "flex",*/}
+                            {/*borderRadius: 5,*/}
+                            {/*marginTop: 5,*/}
+                            {/*marginBottom: 5,*/}
+                            {/*textDecoration:"none"*/}
 
-                        }}
-                    >
+                        {/*}}*/}
+                    {/*>*/}
 
-                    </Link>
-                    </Fade>
+                    {/*</Link>*/}
+                    {/*</Fade>*/}
                 </div>
             </ScrollView>
         );
