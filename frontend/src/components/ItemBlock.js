@@ -20,7 +20,10 @@ class ItemBlock extends React.Component {
                 marginBottom: 5,
                 borderRadius: 5,
                 alignItems: "center",
-                background: "#fff",
+                background: this.state.open?'#fff':"#f9f7fa",
+                boxShadow:this.state.open?'0px 1px 2px rgba(72,84,92,0.2)':undefined,
+                paddingTop:15,
+                transition:'0.5s'
 
             }}
                 onClick={()=>this.setState({open:!this.state.open})}

@@ -7,7 +7,8 @@ import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
 import {Link} from 'react-router-dom';
 import BackIcon from "../images/back.svg"
-import ItemBlock from "../components/ItemBlock"
+import ItemBlockGive from "../components/MarketItemBlockGive"
+import ItemBlockSell from "../components/MarketItemBlockSell"
 import SellModal from "../components/SellModal"
 
 class HomePage extends Component {
@@ -30,7 +31,7 @@ class HomePage extends Component {
 
 
     componentDidMount() {
-        setTimeout(() => this.setState({ready: true}), 2000);
+        setTimeout(() => this.setState({ready: true}), 1000);
     }
 
     renderLoading = () => {
@@ -55,25 +56,13 @@ class HomePage extends Component {
                                 width: "100%"
                             }}
                         >
-                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Items near me</h4>
+                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Items on the market</h4>
                             <span style={{flex: 1}}/>
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
-                    <Fade in timeout={200}>
-                        <div
-                            style={{
-                                display: "flex",
-                                width: "100%"
-                            }}
-                        >
-                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Other inventory</h4>
-                            <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
-                        </div>
-                    </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
+                    {new Array(7).fill().map(_=><ItemBlockGive handleOnSell={this.handleOnSell}/>)}
+                    {new Array(7).fill().map(_=><ItemBlockSell handleOnSell={this.handleOnSell}/>)}
                 </div>
             </ScrollView>
         );

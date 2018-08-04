@@ -5,7 +5,7 @@ import Smile from "../images/smile.svg"
 import Dollar from "../images/coin.svg"
 import Fade from "@material-ui/core/es/Fade/Fade";
 
-class MarketItemBlockGive extends React.Component {
+class ItemBlock extends React.Component {
     state = {
         open: false,
     }
@@ -20,7 +20,10 @@ class MarketItemBlockGive extends React.Component {
                 marginBottom: 5,
                 borderRadius: 5,
                 alignItems: "center",
-                background: "#fff",
+                background: this.state.open?'#fff':"#f9f7fa",
+                boxShadow:this.state.open?'0px 1px 2px rgba(72,84,92,0.2)':undefined,
+                paddingTop:15,
+                transition:'0.5s'
 
             }}
                  onClick={()=>this.setState({open:!this.state.open})}
@@ -40,7 +43,10 @@ class MarketItemBlockGive extends React.Component {
                     />
                     <div
                         style={{display: "flex", flexDirection: "column", height: 45, justifyContent: "space-between"}}>
-                        <div style={{color: "#515961"}}>Free range extra large eggs</div>
+                        <div style={{color: "#515961"}}>
+                            <span style={{color:'#5d1ebe',fontWeight:800,marginRight:5}}>$0</span>
+                            Free range extra large eggs
+                        </div>
                         <div style={{fontSize: 14, color: "#d4d5d8"}}>Eggstreme Egg Co</div>
                     </div>
                     <div style={{flex: 1}}/>
@@ -122,4 +128,4 @@ class MarketItemBlockGive extends React.Component {
     }
 }
 
-export default MarketItemBlockGive
+export default ItemBlock

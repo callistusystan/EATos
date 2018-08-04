@@ -30,7 +30,7 @@ class HomePage extends Component {
 
 
     componentDidMount() {
-        setTimeout(() => this.setState({ready: true}), 2000);
+        setTimeout(() => this.setState({ready: true}), 1000);
     }
 
     renderLoading = () => {
