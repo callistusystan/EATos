@@ -4,7 +4,7 @@ class DeviceBar extends Component {
     render() {
         return (
             <div
-                className={`device-bar ${this.props.position}`}
+                className={`device-bar ${this.props.position} `}
                 style={{
                     width: '100%',
                     height: 72,

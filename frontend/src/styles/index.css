@@ -20,9 +20,9 @@
         align-items: center;
         background: linear-gradient(140deg, #f39c12, #9b59b6, #f39c12);
         background-size: 400% 400%;
-        -webkit-animation: Gradient 15s ease-in-out infinite;
-        -moz-animation: Gradient 15s ease-in-out infinite;
-        animation: Gradient 15s ease-in-out infinite;
+        /*-webkit-animation: Gradient 15s ease-in-out infinite;*/
+        /*-moz-animation: Gradient 15s ease-in-out infinite;*/
+        /*animation: Gradient 15s ease-in-out infinite;*/
     }
 
     /* Animation */
@@ -62,4 +62,35 @@
         }
     }
 
+}
+
+.bluepurple{
+    background:linear-gradient(45deg,rgb(236, 89, 255) 0%, rgb(75, 63, 245));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c39cf0', endColorstr='#625ff5', GradientType=1 );
+}
+
+.orangeyellow{
+    background:linear-gradient(45deg, rgb(255, 208, 59) 0%, rgb(245, 103, 49));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c39cf0', endColorstr='#625ff5', GradientType=1 );
+}
+
+.bluegreen{
+    background:linear-gradient(45deg, rgb(255, 19, 147) 0%, rgb(93, 30, 190));
+}
+
+
+.whiteyellow{
+    background:linear-gradient(45deg, rgb(245, 248, 255) 0%, rgb(255, 221, 72));
+}
+
+.darkbluepurp{
+    background:linear-gradient(45deg, rgb(129, 113, 255) 0%, rgb(169, 148, 255));
+}
+
+h1{
+    font-size: 30px;
+}
+
+.button:hover{
+    cursor:pointer;
 }

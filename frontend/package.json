@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.56",
+    "@material-ui/core": "^1.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-qr-svg": "^2.1.0",
