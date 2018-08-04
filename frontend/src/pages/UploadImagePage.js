@@ -13,17 +13,78 @@ import { Button, CircularProgress } from '@material-ui/core';
 import { PhotoCamera } from '@material-ui/icons';
 import Img from 'react-image';
 import Processed from '../images/processed.png';
+import io from 'socket.io-client';
+import { connect } from 'react-redux';
+const socket = io('http://localhost:3300');
 
-
+const FOOD = [
+    {
+        qr_code: 100,
+        food_name: 'Heinz Beans',
+        expiry_date: '2018-09-18',
+        location: '300m away',
+        image: '',
+        count: 4,
+        units: 'cans',
+        price: 6
+    },
+    {
+        qr_code: 101,
+        food_name: 'Eggs',
+        expiry_date: '2018-08-07',
+        location: '100m away',
+        image: '',
+        count: 1,
+        units: 'dozen',
+        price: 4
+    },
+    {
+        qr_code: 102,
+        food_name: 'Kit Kat',
+        expiry_date: '2018-08-06',
+        location: '400m away',
+        image: '',
+        count: 3,
+        units: 'bars',
+        price: 8
+    },
+    {
+        qr_code: 103,
+        food_name: 'Chocolate Milk Power',
+        expiry_date: '2018-10-31',
+        location: '1km away',
+        image: '',
+        count: 1,
+        units: 'bag',
+        price: 5
+    },
+    {
+        qr_code: 104,
+        food_name: 'Peanut Butter',
+        expiry_date: '2018-08-08',
+        location: '300m away',
+        image: '',
+        count: 500,
+        units: 'ml',
+        price: 6
+    }
+];
 
 class HomePage extends Component {
 
-    state = {
-        ready: false,
-        base64data: null,
-        processing: false,
-        processed: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            ready: false,
+            base64data: null,
+            processing: false,
+            processed: false,
+            food: FOOD.map(f => ({ ...f, curOwner: this.props.profile.name }))
+        };
+
+        socket.emit('getSales', {});
+    }
 
     compressImage = image => {
         if(typeof(image) !== typeof new Blob()){
@@ -121,10 +182,14 @@ class HomePage extends Component {
                         }}
                         onClick={() => {
                             this.handleUpload();
-                            this.setState({ processing: true })
+                            this.setState({ processing: true });
                             setTimeout(() => {
                                 this.setState({processing: false, processed: true});
-                            }, 5000);
+                                this.state.food.forEach(food => {
+                                    console.log('emitting', food);
+                                    socket.emit('createFood', food);
+                                });
+                            }, 2000);
                         }}
                     >
                         {this.state.base64data ? <h3>Scan</h3> : undefined}
@@ -149,8 +214,6 @@ class HomePage extends Component {
                                 this.renderProcessed() : this.renderNotProcessed()}
                         </div>
                     </Fade>
-
-
                     {/*<Fade in timeout={800}>*/}
                     {/*<Link*/}
                     {/*to={'/'}*/}
@@ -200,4 +263,6 @@ const styles = {
     }
 };
 
-export default HomePage;
+const mapStateToProps = ({ profile }) => ({ profile });
+
+export default connect(mapStateToProps)(HomePage);

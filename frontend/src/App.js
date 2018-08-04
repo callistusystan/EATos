@@ -9,8 +9,8 @@ import MobileHackathon from './components/react-mobile-hackathon';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import openSocket from 'socket.io-client';
 import SignInPage from './pages/SignInPage';
+import openSocket from 'socket.io-client';
 const socket = openSocket('http://172.16.96.85:3300');
 
 class App extends Component {

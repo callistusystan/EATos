@@ -30,6 +30,7 @@ io.on('connection', client => {
 io.on('getFoods', getFoods);
 io.on('getSales', getSales);
 io.on('createSale', createSale);
+io.on('createFood', createFood);
 io.on('processTransaction', processTransaction);
 
 function getFoods(accountName, callback) {
@@ -112,6 +113,29 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
             { authorization: [seller] }
         ).then(res => {
             getSales();
+        });
+    });
+}
+
+function createFood({ curOwner, qr_code, food_name, expiry_date, location, image, count, units, price }) {
+    console.log('CREATE FOOD')
+    eos.contract(EOS_CONFIG.contractName).then((contract) => {
+        console.log('CREATING FOOD');
+        contract.createfood(
+            {
+                curOwner, 
+                qr_code, 
+                food_name, 
+                expiry_date, 
+                location,
+                image: '', 
+                count,
+                units,
+                price
+            },
+            { authorization: [curOwner] }
+        ).then(res => {
+            getFood(curOwner);
         });
     });
 }
