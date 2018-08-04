@@ -8,7 +8,7 @@ import { TextField, Button } from '@material-ui/core';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-const socket = openSocket('http://localhost:3300');
+const socket = openSocket('http://172.16.96.85:3300');
 
 class SignInPage extends Component {
 

@@ -12,6 +12,7 @@ import shop from '../images/shopping-basket (1).svg'
 import users from '../images/users.svg'
 import Logo from "../components/Logo"
 import TopBar from '../components/TopBar';
+import { connect } from 'react-redux';
 
 class HomePage extends Component {
 
@@ -34,12 +35,15 @@ class HomePage extends Component {
     renderBody = () => {
         return (
             <ScrollView isDark>
-                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 16}}>
                     <Fade in timeout={200}>
+                        <h3 style={{ alignSelf: 'flex-start' }}>Welcome, {this.props.profile.name}</h3>
+                    </Fade>
+                    <Fade in timeout={400}>
                     <Link
                         to={'/scan'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
                             height:100,
                             display: "flex",
@@ -57,11 +61,11 @@ class HomePage extends Component {
                         <img src={QR} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
-                    <Fade in timeout={400}>
+                    <Fade in timeout={600}>
                     <Link
                         to={'/inventory'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
                             height:100,
                             display: "flex",
@@ -80,11 +84,11 @@ class HomePage extends Component {
                         <img src={fridge} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
-                    <Fade in timeout={600}>
+                    <Fade in timeout={800}>
                     <Link
                         to={'market'}
                         style={{
-                            width: "90%",
+                            width: "100%",
                             minHeight: 100,
                             height:100,
                             display: "flex",
@@ -103,11 +107,11 @@ class HomePage extends Component {
                         <img src={shop} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
-                    <Fade in timeout={600}>
+                    <Fade in timeout={1000}>
                         <Link
                             to={'profile'}
                             style={{
-                                width: "90%",
+                                width: "100%",
                                 minHeight: 100,
                                 height:100,
                                 display: "flex",
@@ -156,4 +160,8 @@ const styles = {
     }
 };
 
-export default withRouter(HomePage);
+const mapStateToProps = ({profile}) => ({
+    profile
+});
+
+export default withRouter(connect(mapStateToProps)(HomePage));
