@@ -13,8 +13,8 @@ import { Button, CircularProgress } from '@material-ui/core';
 import { PhotoCamera } from '@material-ui/icons';
 import Img from 'react-image';
 import Processed from '../images/processed.png';
-import io from 'socket.io-client';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 const socket = io('http://localhost:3300');
 
 const FOOD = [
