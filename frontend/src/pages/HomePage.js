@@ -52,7 +52,7 @@ class HomePage extends Component {
                             background:'#F97F51'
                         }}
                     >
-                        <h1 style={{textAlign:'left',marginLeft:20}}>Scan</h1>
+                        <h1 style={{textAlign:'left',marginLeft:20}}>Scan Receipt</h1>
                         <div style={{flex:1}}/>
                         <img src={QR} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
@@ -121,7 +121,7 @@ class HomePage extends Component {
 
                             }}
                         >
-                            <h1 style={{textAlign:'left',marginLeft:20}}>Market Place</h1>
+                            <h1 style={{textAlign:'left',marginLeft:20}}>My Profile</h1>
                             <div style={{flex:1}}/>
                             <img src={users} height={50} width={50} style={{marginRight:20}} alt=""/>
                         </Link>

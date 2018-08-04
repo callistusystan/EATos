@@ -19,7 +19,7 @@ class TopBar extends Component {
                     ...this.props.style
                 }}
             >
-                <Link to='/' style={{ position: 'absolute' }}>
+                <Link to='/home' style={{ position: 'absolute' }}>
                     <img src={Sausage} style={{ width: 32, height: 32 }} />
                 </Link>
                 <Logo />

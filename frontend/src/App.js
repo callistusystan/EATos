@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HomePage from './pages/HomePage';
 import InventoryPage from './pages/InventoryPage';
-import CalTestPage from './pages/CalTestPage';
 import MarketPlacePage from './pages/Market';
 import ScanPage from './pages/ScanPage';
 import UploadImagePage from './pages/UploadImagePage';
@@ -11,6 +10,7 @@ import {Route, Switch, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import openSocket from 'socket.io-client';
+import SignInPage from './pages/SignInPage';
 const socket = openSocket('http://localhost:3300');
 
 class App extends Component {
@@ -24,23 +24,39 @@ class App extends Component {
             console.log('res', res);
         });
     }
+
+    // componentDidMount() {
+    //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
+    //         this.props.history.push('/');
+    //     }
+    // }
+    //
+    // componentDidUpdate() {
+    //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
+    //         this.props.history.push('/');
+    //     }
+    // }
+    
     render() {
+        console.log(this.props);
         return (
             <MobileHackathon appName='EOS' >
                 <Switch>
-                    <Route path='/caltest' component={CalTestPage} />
                     <Route path='/inventory' component={InventoryPage} />
                     <Route path='/market' component={MarketPlacePage} />
-                    <Route path='/scan' component={ScanPage} />
+                    <Route path='/scan' component={UploadImagePage} />
                     <Route path='/profile/:uid' component={ProfilePage} />
                     <Route path='/profile' component={ProfilePage} />
-                    <Route path='/UploadImagePage' component={UploadImagePage} />
-                    <Route path='/' component={HomePage} />
+                    <Route path='/home' component={HomePage} />
+                    <Route exact path='/' component={SignInPage} />
                 </Switch>
-
             </MobileHackathon>
         );
     }
 }
 
-export default  withRouter(connect(null, actions)(App));
+const mapStateToProps = ({ profile }) => ({
+    profile
+});
+
+export default withRouter(connect(mapStateToProps, actions)(App));

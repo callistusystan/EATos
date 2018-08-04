@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import BackIcon from "../images/back.svg"
 import UserIcon from "../images/User-icon.svg"
 import TopBar from "../components/TopBar";
+import { Button } from '@material-ui/core';
+import { PhotoCamera } from '@material-ui/icons';
+import Img from 'react-image';
 
 
 
@@ -59,47 +62,48 @@ class HomePage extends Component {
         console.log(uid)
         return (
             <ScrollView isDark>
-                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
-                    {this.state.base64data&&<Fade in timeout={500}><img src={this.state.base64data} style={{width:"90%",height:"auto",marginTop:100}} alt=""/></Fade>}
+                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', padding: 16 }}>
                     <Fade in timeout={200}>
-                        <div
-                            className={'bluepurple'}
-                            style={{
-                                width: "90%",
-                                minHeight: 100,
-                                height:100,
-                                display: "flex",
-                                borderRadius: 5,
-                                marginTop:10,
-                                marginBottom:5,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                color: "#fff",
-                                textDecoration:"none"
-                            }}
-                        >
-                            <input type="file" onChange={e=>this.compressImage(e.target.files[0])} accept="image/*"/>
+                        <h3>Scan Receipt</h3>
+                    </Fade>
+                    <Fade in timeout={400}>
+                        <div style={{marginTop: 16}}>
+                    {this.state.base64data ? <Fade in timeout={500}><img src={this.state.base64data} style={{width:"90%",height:"auto",marginTop:16}} alt=""/></Fade> : <p>No image</p>}
                         </div>
                     </Fade>
-                    <button
-                        className={'orangeyellow'}
+
+                    <input
+                        type="file"
+                        id="take-pic" accept="image/*"
+                        onChange={e=>this.compressImage(e.target.files[0])}
+                        style={{display: 'none'}}
+                    />
+                    <Fade in timeout={600}>
+                        <label htmlFor="take-pic">
+                            <Button component="span" style={{ marginTop: 16 }}>
+                                <PhotoCamera />
+                                Add Photo
+                            </Button>
+                        </label>
+                    </Fade>
+                    <Button
+                        fullWidth
+                        variant='outlined'
                         style={{
-                            width: "90%",
                             transition:'1s',
-                            height:this.state.base64data?100:0,
+                            height:this.state.base64data?80:0,
                             display: "flex",
                             borderRadius: 5,
                             marginTop:10,
                             marginBottom:5,
                             justifyContent: "center",
                             alignItems: "center",
-                            color: "#fff",
                             textDecoration:"none"
                         }}
                         onClick={()=>this.handleUpload()}
                     >
                         {this.state.base64data?<h3>Upload</h3>:undefined}
-                    </button>
+                    </Button>
                     {/*<Fade in timeout={800}>*/}
                     {/*<Link*/}
                     {/*to={'/'}*/}
@@ -141,7 +145,7 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        background:"#480a87"
+        background:"#FFF"
         // backgroundImage: `url(${Background})`,
         // backgroundPosition: 'center',
         // backgroundRepeat: 'no-repeat',

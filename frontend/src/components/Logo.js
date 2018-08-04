@@ -9,6 +9,7 @@ class Logo extends Component {
                     fontWeight: 700,
                     backgroundColor: '#3B3B98',
                     padding: '0.1em 0.25em',
+                    letterSpacing: 4,
                     color: '#FFF', ...this.props.mediStyle
                 }}>EAT</span>
                 <span style={{
