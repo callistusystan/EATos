@@ -39,7 +39,7 @@ class HomePage extends Component {
                             minHeight: 100,
                             display: "flex",
                             borderRadius: 5,
-                            marginTop:5,
+                            marginTop:10,
                             marginBottom:5,
                             justifyContent: "center",
                             alignItems: "center",
@@ -126,7 +126,8 @@ class HomePage extends Component {
                         paddingTop: 30,
                         display: "flex",
                         boxShadow:"0px 0px 5px 0px #bbb",
-                        color:"#fff"
+                        color:"#fff",
+                        paddingBottom:20
                     }}
 
                 >

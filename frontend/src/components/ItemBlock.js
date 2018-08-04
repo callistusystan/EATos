@@ -3,10 +3,11 @@ import ShoppingBasket from "../images/shopping-basket.svg"
 import Dislike from "../images/thumb-down-outline-symbol.svg"
 import Smile from "../images/smile.svg"
 import Dollar from "../images/coin.svg"
+import Fade from "@material-ui/core/es/Fade/Fade";
 
 class ItemBlock extends React.Component {
     state = {
-        open: false
+        open: false,
     }
 
     render() {
@@ -48,6 +49,7 @@ class ItemBlock extends React.Component {
                     </div>
                 </div>
                 {this.state.open&&
+                    <Fade in out timeout={500}>
                 <div
                     style={{
                         width:"100%",
@@ -86,31 +88,35 @@ class ItemBlock extends React.Component {
                     >
                         <button style={{
                             flex: 1,
-                            fontSize: 25,
-                            height: 50,
+                            fontSize: 18,
+                            height: 40,
                             borderRadius: 25,
                             display: "flex",
                             justifyContent: "center",
-                            alignItems: "center"
-                        }}>
+                            alignItems: "center",
+                            border:"1.5px solid #0b54ff"
+                        }}
+                            onClick={()=>this.props.handleOnSell('Free range extra large eggs')}
+                        >
                             <img src={Dollar} style={{width: 25, height: 25}} alt=""/>
-                            <span style={{marginLeft: 10}}>Sell</span>
+                            <span style={{marginLeft: 10, color:"#0b54ff"}}>Sell</span>
                         </button>
                         <div style={{width: 10}}/>
                         <button style={{
                             flex: 1,
-                            fontSize: 25,
-                            height: 50,
+                            fontSize: 18,
+                            height: 40,
                             borderRadius: 25,
+                            border:'1.5px solid #6a0bff',
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
                             <img src={Smile} style={{width: 25, height: 25}} alt=""/>
-                            <span style={{marginLeft: 10}}>Give</span>
+                            <span style={{marginLeft: 10,color:"#6a0bff"}}>Give</span>
                         </button>
                     </div>
-                </div>}
+                </div></Fade>}
             </div>
         )
     }

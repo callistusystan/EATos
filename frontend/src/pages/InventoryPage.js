@@ -8,12 +8,26 @@ import Fade from "@material-ui/core/Fade/Fade"
 import {Link} from 'react-router-dom';
 import BackIcon from "../images/back.svg"
 import ItemBlock from "../components/ItemBlock"
+import SellModal from "../components/SellModal"
 
 class HomePage extends Component {
 
     state = {
-        ready: false
+        ready: false,
+        sellModalOpen: false,
+        giveModalOpen: false,
+        currentItemName: null
     };
+
+
+    handleOnSell = (currentItemName) => {
+        this.setState({sellModalOpen: true,currentItemName})
+    }
+
+    handleOnClose = () => {
+        this.setState({sellModalOpen: false, giveModalOpen:false})
+    }
+
 
     componentDidMount() {
         setTimeout(() => this.setState({ready: true}), 2000);
@@ -31,6 +45,9 @@ class HomePage extends Component {
         return (
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                    {this.state.sellModalOpen &&
+                    <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName}/>
+                    }
                     <Fade in timeout={200}>
                         <div
                             style={{
@@ -38,17 +55,12 @@ class HomePage extends Component {
                                 width: "100%"
                             }}
                         >
-                            <h4 style={{paddingLeft: 10, color:"#515961"}}>About to expire</h4>
+                            <h4 style={{paddingLeft: 10, color: "#515961"}}>About to expire</h4>
                             <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color:"#a2a3a6", fontWeight:500}}>14 items</h4>
+                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
+                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
                     <Fade in timeout={200}>
                         <div
                             style={{
@@ -56,17 +68,12 @@ class HomePage extends Component {
                                 width: "100%"
                             }}
                         >
-                            <h4 style={{paddingLeft: 10, color:"#515961"}}>Other inventory</h4>
+                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Other inventory</h4>
                             <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color:"#a2a3a6", fontWeight:500}}>14 items</h4>
+                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
-                    <ItemBlock/>
+                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
                 </div>
             </ScrollView>
         );
@@ -84,13 +91,14 @@ class HomePage extends Component {
                         display: "flex",
                         boxShadow: "0px 0px 5px 0px #bbb",
                         color: "#fff",
-                        alignItems: "center"
+                        alignItems: "center",
+                        paddingBottom:20
                     }}
 
                 >
-                    <div style={{flex: 1,marginLeft:10}}>
+                    <div style={{flex: 1, marginLeft: 10}}>
                         <Link to={'/'}>
-                        <img src={BackIcon} width={25} height={25} alt=""/>
+                            <img src={BackIcon} width={25} height={25} alt=""/>
                         </Link>
                     </div>
                     <span style={{fontSize: 30, justifySelf: "center"}}>Inventory</span>
