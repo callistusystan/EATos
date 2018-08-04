@@ -9,7 +9,7 @@ import {Link, withRouter} from 'react-router-dom';
 import BackIcon from "../images/back.svg"
 import ItemBlockGive from "../components/MarketItemBlockGive"
 import ItemBlockSell from "../components/MarketItemBlockSell"
-import SellModal from "../components/SellModal"
+import SellModal from "../components/BuyModal"
 import TopBar from "../components/TopBar";
 
 class HomePage extends Component {
@@ -18,16 +18,22 @@ class HomePage extends Component {
         ready: false,
         sellModalOpen: false,
         giveModalOpen: false,
-        currentItemName: null
+        currentItemName: null,
+        type: null
     };
 
 
-    handleOnSell = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName})
+    handleOnBuy = (food_name,units,price,seller) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, type: "Buy"})
     }
 
+    handleOnClaim = (food_name,units,price,seller) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, type: "Sell"})
+    }
+
+
     handleOnClose = () => {
-        this.setState({sellModalOpen: false, giveModalOpen:false})
+        this.setState({sellModalOpen: false, giveModalOpen: false})
     }
 
 
@@ -48,7 +54,15 @@ class HomePage extends Component {
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
                     {this.state.sellModalOpen &&
-                    <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName}/>
+                    <SellModal
+                        handleOnClose={this.handleOnClose}
+                        itemName={this.state.currentItemName}
+                        type={this.state.type}
+                        food_name={this.state.food_name}
+                        units={this.state.units}
+                        price={this.state.price}
+                        seller={this.state.seller}
+                    />
                     }
                     <Fade in timeout={200}>
                         <div
@@ -62,8 +76,25 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(7).fill().map(_=><ItemBlockGive handleOnSell={this.handleOnSell}/>)}
-                    {new Array(7).fill().map(_=><ItemBlockSell handleOnSell={this.handleOnSell}/>)}
+                    {new Array(7).fill().map(_ =>
+                        <ItemBlockGive
+                            handler={this.handleOnBuy}
+                            units={5}
+                            expiry_date={"7 August 2018"}
+                            price={0}
+                            seller={"Blockchain Cal"}
+                            food_name={"Chicken feet"}
+                        />
+                    )}
+                    {new Array(7).fill().map(_ =>
+                        <ItemBlockSell
+                            handler={this.handleOnClaim}
+                            units={5}
+                            expiry_date={"7 August 2018"}
+                            price={15}
+                            seller={"Blockchain Cal"}
+                            food_name={"Chicken feet"}
+                        />)}
                 </div>
             </ScrollView>
         );
@@ -72,7 +103,7 @@ class HomePage extends Component {
     render() {
         return (
             <div style={styles.container}>
-                <TopBar />
+                <TopBar/>
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
                 {/*<BottomBar />*/}
             </div>
@@ -94,4 +125,4 @@ const styles = {
     }
 };
 
-export default  withRouter(HomePage);
+export default withRouter(HomePage);
