@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import InventoryPage from './pages/InventoryPage';
 import MarketPlacePage from './pages/Market';
 import ScanPage from './pages/ScanPage';
+import UploadImagePage from './pages/UploadImagePage';
 import ProfilePage from './pages/ProfilePage'
 import MobileHackathon from './components/react-mobile-hackathon';
 import { Route, Switch } from 'react-router-dom';
@@ -17,6 +18,7 @@ class App extends Component {
                     <Route path='/scan' component={ScanPage} />
                     <Route path='/profile/:uid' component={ProfilePage} />
                     <Route path='/profile' component={ProfilePage} />
+                    <Route path='/UploadImagePage' component={UploadImagePage} />
                     <Route path='/' component={HomePage} />
                 </Switch>
 
