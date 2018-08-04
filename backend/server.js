@@ -24,23 +24,26 @@ getSales();
 
 io.on('connection', client => {
     client.emit('getSales', SALES);
+
     client.on('createAcc', createAcc);
+    client.on('getFoods', (args) => {
+        getFoods(args)
+            .then(({ rows }) => {
+                client.emit('getFoods', rows);
+            }).catch(err => console.log('getfooderr', err));
+    });
+    client.on('getSales', getSales);
+    client.on('createSale', createSale);
+    client.on('createFood', createFood);
+    client.on('processTransaction', processTransaction);
 });
 
-io.on('getFoods', getFoods);
-io.on('getSales', getSales);
-io.on('createSale', createSale);
-io.on('createFood', createFood);
-io.on('processTransaction', processTransaction);
-
 function getFoods(accountName, callback) {
-    eos.getTableRows({
+    return eos.getTableRows({
         code: EOS_CONFIG.contractName,
-        scope: accountName,
+        scope: accountName || 'callistus',
         table:'foods',
         json: true,
-    }).then(({ rows }) => {
-        NAME_TO_SOCKET[accountName].emit('getFoods', rows);
     });
 }
 
@@ -102,7 +105,7 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
     eos.contract(EOS_CONFIG.contractName).then((contract) => {
         contract.createsale(
             {
-                seller, 
+                seller: seller || 'callistus', 
                 sale_id: SALES.length+1, 
                 type_of_sale, 
                 qr_code, 
@@ -110,7 +113,7 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
                 price, 
                 description
             },
-            { authorization: [seller] }
+            { authorization: [seller || 'callistus'] }
         ).then(res => {
             getSales();
         });
@@ -123,7 +126,7 @@ function createFood({ curOwner, qr_code, food_name, expiry_date, location, image
         console.log('CREATING FOOD');
         contract.createfood(
             {
-                curOwner, 
+                curOwner: curOwner || 'callistus', 
                 qr_code, 
                 food_name, 
                 expiry_date, 
@@ -135,7 +138,7 @@ function createFood({ curOwner, qr_code, food_name, expiry_date, location, image
             },
             { authorization: [curOwner] }
         ).then(res => {
-            getFood(curOwner);
+            getFoods(curOwner);
         });
     });
 }
@@ -144,14 +147,14 @@ function processTransaction({ curOwner, newOwner, qr_code, count, type_of_sale, 
     eos.contract(EOS_CONFIG.contractName).then((contract) => {
         contract.setfoodowner(
             {
-                curOwner,
+                curOwner: curOwner  || 'callistus',
                 newOwner,
                 qr_code,
                 count,
                 type_of_sale,
                 sale_id
             },
-            { authorization: [curOwner, newOwner] }
+            { authorization: [curOwner || 'callistus', newOwner || 'evelyn'] }
         ).then(res => {
             getSales();
             getFoods(curOwner);
