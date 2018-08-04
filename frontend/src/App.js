@@ -7,7 +7,7 @@ import ScanPage from './pages/ScanPage';
 import UploadImagePage from './pages/UploadImagePage';
 import ProfilePage from './pages/ProfilePage'
 import MobileHackathon from './components/react-mobile-hackathon';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import openSocket from 'socket.io-client';
@@ -43,4 +43,4 @@ class App extends Component {
     }
 }
 
-export default connect(null, actions)(App);
+export default  withRouter(connect(null, actions)(App));

@@ -5,7 +5,7 @@ import LoadingView from '../components/react-mobile-hackathon/devices/LoadingVie
 import {GridLoader} from 'react-spinners';
 import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import BackIcon from "../images/back.svg"
 
 
@@ -153,4 +153,4 @@ const styles = {
     }
 };
 
-export default HomePage;
+export default  withRouter(HomePage);
