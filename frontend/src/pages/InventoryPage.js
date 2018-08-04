@@ -65,7 +65,7 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
+                    {new Array(14).fill().map(_=><ItemBlock expiry_date={"6 August 2018"} food_name={"Food Name"} handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
                     <Fade in timeout={200}>
                         <div
                             style={{
@@ -78,7 +78,7 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
+                    {new Array(14).fill().map(_=><ItemBlock expiry_date={"6 August 2018"} food_name={"Food Name"} handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
                 </div>
             </ScrollView>
         );
