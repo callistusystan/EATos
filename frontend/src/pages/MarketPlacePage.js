@@ -1,24 +1,27 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import DeviceBar from '../components/react-mobile-hackathon/devices/DeviceBar';
 import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView';
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
-import { GridLoader } from 'react-spinners';
+import {GridLoader} from 'react-spinners';
 import Background from '../images/background.jpg';
+import Fade from "@material-ui/core/Fade/Fade"
+import { Link } from 'react-router-dom';
 
-class MarketPlacePage extends Component {
+
+class HomePage extends Component {
 
     state = {
         ready: false
     };
 
     componentDidMount() {
-        setTimeout(() => this.setState({ ready: true }), 2000);
+        setTimeout(() => this.setState({ready: true}), 2000);
     }
 
     renderLoading = () => {
         return (
             <LoadingView>
-                <GridLoader color='#ffb432' loading={!this.state.ready} />
+                <GridLoader color='#ffb432' loading={!this.state.ready}/>
             </LoadingView>
         );
     };
@@ -26,10 +29,87 @@ class MarketPlacePage extends Component {
     renderBody = () => {
         return (
             <ScrollView isDark>
-                <div style={{ height: '200%', display: 'flex', flexDirection: 'column' }}>
-                    <h1 style={{ color: 'rgb(250, 250, 255)' }}>React App</h1>
-                    <div style={{ flex: 1 }} />
-                    <h2 style={{ color: 'rgb(250, 250, 255)' }}>You've reached the end!</h2>
+                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                    <Fade in timeout={200}>
+                        <Link
+                            to={'/scan'}
+                            className={'bluepurple'}
+                            style={{
+                                width: "90%",
+                                minHeight: 100,
+                                display: "flex",
+                                borderRadius: 5,
+                                marginTop:5,
+                                marginBottom:5,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "#fff",
+                                textDecoration:"none"
+                            }}
+                        >
+                            <h1>Scan</h1>
+                        </Link>
+                    </Fade>
+                    <Fade in timeout={400}>
+                        <Link
+                            to={'/inventory'}
+                            className={'bluegreen'}
+                            style={{
+                                width: "90%",
+                                minHeight: 100,
+                                display: "flex",
+                                borderRadius: 5,
+                                marginTop: 5,
+                                marginBottom: 5,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "#fff",
+                                textDecoration:"none"
+
+                            }}
+                        >
+                            <h1>My Inventory</h1>
+                        </Link>
+                    </Fade>
+                    <Fade in timeout={600}>
+                        <Link
+                            to={'market'}
+                            className={'orangeyellow'}
+                            style={{
+                                width: "90%",
+                                minHeight: 100,
+                                display: "flex",
+                                borderRadius: 5,
+                                marginTop: 5,
+                                marginBottom: 5,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "#fff",
+                                textDecoration:"none"
+
+                            }}
+                        >
+                            <h1>Market Place</h1>
+                        </Link>
+                    </Fade>
+                    <Fade in timeout={800}>
+                        <Link
+                            to={'/'}
+                            className={'whiteyellow'}
+                            style={{
+                                minHeight: 100,
+                                width: "90%",
+                                display: "flex",
+                                borderRadius: 5,
+                                marginTop: 5,
+                                marginBottom: 5,
+                                textDecoration:"none"
+
+                            }}
+                        >
+
+                        </Link>
+                    </Fade>
                 </div>
             </ScrollView>
         );
@@ -38,29 +118,34 @@ class MarketPlacePage extends Component {
     render() {
         return (
             <div style={styles.container}>
-                <DeviceBar
-                    title='Market Place'
-                    position='top'
-                    noBorder
-                    isAppBar
-                    titleStyle={{
-                        color: 'rgb(250, 250, 255)'
-                    }}
+                <div
+                    className={"darkbluepurp"}
                     style={{
-                        borderColor: 'rgba(255, 255, 255, .2)'
+                        // height: 72,
+                        width: "100%",
+                        paddingTop: 30,
+                        display: "flex",
+                        boxShadow:"0px 0px 5px 0px #bbb",
+                        marginBottom:20,
+                        color:"#fff"
                     }}
-                />
+
+                >
+                    <div style={{flex:1}}></div>
+                    <span style={{fontSize:30,justifySelf: "center"}}>Home</span>
+                    <div style={{flex:1}}></div>
+                </div>
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
-                <DeviceBar
-                    title='Something'
-                    position='bottom'
-                    titleStyle={{
-                        color: 'rgb(250, 250, 255)'
-                    }}
-                    style={{
-                        borderColor: 'rgba(255, 255, 255, .2)'
-                    }}
-                />
+                {/*<DeviceBar*/}
+                {/*title='Something'*/}
+                {/*position='bottom'*/}
+                {/*titleStyle={{*/}
+                {/*color: 'rgb(250, 250, 255)'*/}
+                {/*}}*/}
+                {/*style={{*/}
+                {/*borderColor: 'rgba(255, 255, 255, .2)'*/}
+                {/*}}*/}
+                {/*/>*/}
             </div>
         );
     }
@@ -72,11 +157,12 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundImage: `url(${Background})`,
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        background:"#fefcff"
+        // backgroundImage: `url(${Background})`,
+        // backgroundPosition: 'center',
+        // backgroundRepeat: 'no-repeat',
+        // backgroundAttachment: 'fixed'
     }
 };
 
-export default MarketPlacePage;
+export default HomePage;

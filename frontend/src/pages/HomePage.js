@@ -5,6 +5,8 @@ import LoadingView from '../components/react-mobile-hackathon/devices/LoadingVie
 import {GridLoader} from 'react-spinners';
 import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
+import { Link } from 'react-router-dom';
+
 
 class HomePage extends Component {
 
@@ -29,70 +31,85 @@ class HomePage extends Component {
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
                     <Fade in timeout={200}>
-
-                    <div
+                    <Link
+                        to={'/scan'}
                         className={'bluepurple'}
                         style={{
                             width: "90%",
                             minHeight: 100,
                             display: "flex",
-                            borderRadius: 10,
-                            // marginTop:5,
-                            // marginBottom:5,
+                            borderRadius: 5,
+                            marginTop:5,
+                            marginBottom:5,
                             justifyContent: "center",
                             alignItems: "center",
-                            color: "#fff"
+                            color: "#fff",
+                            textDecoration:"none"
                         }}
                     >
                         <h1>Scan</h1>
-                    </div>
+                    </Link>
                     </Fade>
-                    <div
+                    <Fade in timeout={400}>
+                    <Link
+                        to={'/inventory'}
                         className={'bluegreen'}
                         style={{
                             width: "90%",
                             minHeight: 100,
                             display: "flex",
-                            borderRadius: 10,
+                            borderRadius: 5,
                             marginTop: 5,
                             marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
-                            color: "#fff"
+                            color: "#fff",
+                            textDecoration:"none"
+
                         }}
                     >
                         <h1>My Inventory</h1>
-                    </div>
-                    <div
+                    </Link>
+                    </Fade>
+                    <Fade in timeout={600}>
+                    <Link
+                        to={'market'}
                         className={'orangeyellow'}
                         style={{
                             width: "90%",
                             minHeight: 100,
                             display: "flex",
-                            borderRadius: 10,
+                            borderRadius: 5,
                             marginTop: 5,
                             marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
-                            color: "#fff"
+                            color: "#fff",
+                            textDecoration:"none"
+
                         }}
                     >
                         <h1>Market Place</h1>
-                    </div>
-                    <div
+                    </Link>
+                    </Fade>
+                    <Fade in timeout={800}>
+                    <Link
+                        to={'/'}
                         className={'whiteyellow'}
                         style={{
                             minHeight: 100,
                             width: "90%",
                             display: "flex",
-                            borderRadius: 10,
+                            borderRadius: 5,
                             marginTop: 5,
-                            marginBottom: 5
+                            marginBottom: 5,
+                            textDecoration:"none"
+
                         }}
                     >
 
-                    </div>
-
+                    </Link>
+                    </Fade>
                 </div>
             </ScrollView>
         );
@@ -102,17 +119,19 @@ class HomePage extends Component {
         return (
             <div style={styles.container}>
                 <div
+                    className={"darkbluepurp"}
                     style={{
                         // height: 72,
                         width: "100%",
-                        paddingTop: 40,
+                        paddingTop: 30,
                         display: "flex",
                         boxShadow:"0px 0px 5px 0px #bbb",
-                        marginBottom:20
+                        color:"#fff"
                     }}
+
                 >
                     <div style={{flex:1}}></div>
-                    <h1 style={{justifySelf: "center"}}>Home</h1>
+                    <span style={{fontSize:30,justifySelf: "center"}}>Home</span>
                     <div style={{flex:1}}></div>
                 </div>
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
@@ -137,6 +156,7 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        background:"#fefcff"
         // backgroundImage: `url(${Background})`,
         // backgroundPosition: 'center',
         // backgroundRepeat: 'no-repeat',
