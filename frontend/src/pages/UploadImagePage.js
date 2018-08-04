@@ -19,6 +19,9 @@ class HomePage extends Component {
     };
 
     compressImage = image => {
+        if(typeof(image) !== typeof new Blob()){
+            return
+        }
         const imageCompressor = new ImageCompressor();
         imageCompressor.compress(image,{
             maxHeight:320,
@@ -73,7 +76,7 @@ class HomePage extends Component {
                                 textDecoration:"none"
                             }}
                         >
-                            <input type="file" onChange={e=>this.compressImage(e.target.files[0])}/>
+                            <input type="file" onChange={e=>this.compressImage(e.target.files[0])} accept="image/*"/>
                         </div>
                     </Fade>
                     <button
