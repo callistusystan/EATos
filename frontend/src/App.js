@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import HomePage from './pages/HomePage';
 import InventoryPage from './pages/InventoryPage';
 import MarketPlacePage from './pages/Market';
-import ScanPage from './pages/ScanPage';
 import UploadImagePage from './pages/UploadImagePage';
 import ProfilePage from './pages/ProfilePage'
 import MobileHackathon from './components/react-mobile-hackathon';
@@ -11,34 +10,41 @@ import { connect } from 'react-redux';
 import * as actions from './actions';
 import SignInPage from './pages/SignInPage';
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://172.16.96.85:3300');
 
 class App extends Component {
     constructor(props) {
         super(props);
 
-        socket.on('getSales', res => {
+
+    }
+
+    componentDidMount(){
+        this.socket= openSocket('http://172.16.96.85:3300');
+        this.socket.on('getSales', res => {
             console.log('sales', res);
         });
-        socket.on('getFoods', res => {
+        this.socket.on('getFoods', res => {
             console.log('res', res);
         });
+    }
+
+    componentWillUnmount(){
+        this.socket.close()
     }
 
     // componentDidMount() {
     //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
     //         this.props.history.push('/');
     //     }
-    // }
+    // }!
     //
     // componentDidUpdate() {
     //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
     //         this.props.history.push('/');
     //     }
     // }
-    
+
     render() {
-        console.log(this.props);
         return (
             <MobileHackathon appName='EOS' >
                 <Switch>

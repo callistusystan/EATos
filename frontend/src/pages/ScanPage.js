@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import DeviceBar from '../components/react-mobile-hackathon/devices/DeviceBar';
 import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView';
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
 import {GridLoader} from 'react-spinners';
-import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
-import {Link, withRouter} from 'react-router-dom';
-import BackIcon from "../images/back.svg"
+import { withRouter} from 'react-router-dom';
 import TopBar from "../components/TopBar";
 
 

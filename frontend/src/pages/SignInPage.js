@@ -8,7 +8,7 @@ import { TextField, Button } from '@material-ui/core';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-const socket = openSocket('http://172.16.96.85:3300');
+
 
 class SignInPage extends Component {
 
@@ -19,7 +19,14 @@ class SignInPage extends Component {
     };
 
     componentDidMount() {
+
         setTimeout(() => this.setState({ready: true}), 1000);
+        this.socket = openSocket('http://172.16.96.85:3300');
+    }
+
+    componentWillUnmount(){
+        this.socket.close()
+
     }
 
     renderLoading = () => {
@@ -31,7 +38,7 @@ class SignInPage extends Component {
     };
 
     createAccount = (e) => {
-        socket.emit('createAcc', this.state.name, (data) => {
+        this.socket.emit('createAcc', this.state.name, (data) => {
             console.log(data);
             if (data) {
                 this.props.setProfile({ name: this.state.name });
