@@ -4,8 +4,7 @@ import ScrollView from '../components/react-mobile-hackathon/devices/ScrollView'
 import LoadingView from '../components/react-mobile-hackathon/devices/LoadingView';
 import {GridLoader} from 'react-spinners';
 import Background from '../images/background.jpg';
-
-
+import Fade from "@material-ui/core/Fade/Fade"
 
 class HomePage extends Component {
 
@@ -29,6 +28,8 @@ class HomePage extends Component {
         return (
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                    <Fade in timeout={200}>
+
                     <div
                         className={'bluepurple'}
                         style={{
@@ -45,6 +46,7 @@ class HomePage extends Component {
                     >
                         <h1>Scan</h1>
                     </div>
+                    </Fade>
                     <div
                         className={'bluegreen'}
                         style={{
