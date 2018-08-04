@@ -8,6 +8,7 @@ import Fade from "@material-ui/core/es/Fade/Fade";
 class ItemBlock extends React.Component {
     state = {
         open: false,
+        type: null
     }
 
     render() {
@@ -114,7 +115,9 @@ class ItemBlock extends React.Component {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center"
-                        }}>
+                        }}
+                            onClick={()=>this.props.handleOnGive('Free range extra large eggs')}
+                        >
                             <img src={Smile} style={{width: 25, height: 25}} alt=""/>
                             <span style={{marginLeft: 10,color:"#6a0bff"}}>Give</span>
                         </button>

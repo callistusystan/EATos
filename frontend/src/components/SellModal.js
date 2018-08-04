@@ -6,8 +6,12 @@ import TextField from "@material-ui/core/es/TextField/TextField";
 
 class SellModal extends React.Component {
 
+    handleOnConfirm = () => {
+        console.log("confirm")
+    }
 
     render() {
+        const {type} = this.props
         return (
             <div
 
@@ -26,7 +30,7 @@ class SellModal extends React.Component {
                         position: "absolute",
                         top: "calc(30% - 100px)",
                         width: "90%",
-                        height: 200,
+                        minHeight: 200,
                         background: "#fff",
                         display: 'flex',
                         flexDirection: "column",
@@ -43,7 +47,7 @@ class SellModal extends React.Component {
                             color:"#999999"
                         }}
                     >
-                        <span>List {this.props.itemName}?</span>
+                        <span>List {this.props.itemName} for {type}?</span>
                     </div>
                     <div style={{flex:1}}/>
                     <div
@@ -54,9 +58,28 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter price'}/>
+                        <TextField fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
                     </div>
-
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "90%",
+                            justifyContent:"center",
+                            marginBottom:20
+                        }}
+                    >
+                        <TextField fullWidth label={'Enter quantity'}/>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "90%",
+                            justifyContent:"center",
+                            marginBottom:20
+                        }}
+                    >
+                        <TextField fullWidth label={'Enter description'}/>
+                    </div>
                     <div
                         style={{
                             display: "flex",
@@ -74,7 +97,7 @@ class SellModal extends React.Component {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                border: "1.5px solid rgb(216,216,216)",
+                                border: "1.5px solid rgb(200,200,200)",
                                 background: "#fff"
                             }}
                             onClick={e => {
@@ -82,7 +105,7 @@ class SellModal extends React.Component {
                                 console.log(e)
                             }}
                         >
-                            <span style={{marginLeft: 10, color: "rgb(216,216,216)"}}>Cancel</span>
+                            <span style={{marginLeft: 10, color: "rgb(200,200,200)"}}>Cancel</span>
                         </button>
                         <div style={{width: 10}}/>
                         <button
@@ -97,7 +120,9 @@ class SellModal extends React.Component {
                                 alignItems: "center",
                                 border: "none",
                                 background: "linear-gradient(90deg,rgb(80, 114, 249) 0%, rgb(186, 162, 232))"
-                            }}>
+                            }}
+                            onClick={()=>this.handleOnConfirm()}
+                        >
                             <span style={{marginLeft: 10, color: "#fff"}}>Confirm</span>
                         </button>
                     </div>

@@ -17,12 +17,16 @@ class HomePage extends Component {
         ready: false,
         sellModalOpen: false,
         giveModalOpen: false,
-        currentItemName: null
+        currentItemName: null,
     };
 
 
     handleOnSell = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName})
+        this.setState({sellModalOpen: true,currentItemName, type:'sell'})
+    }
+
+    handleOnGive = (currentItemName) => {
+        this.setState({sellModalOpen: true,currentItemName, type:'give'})
     }
 
     handleOnClose = () => {
@@ -47,7 +51,7 @@ class HomePage extends Component {
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
                     {this.state.sellModalOpen &&
-                    <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName}/>
+                    <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
                     }
                     <Fade in timeout={200}>
                         <div
@@ -61,7 +65,7 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
+                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
                     <Fade in timeout={200}>
                         <div
                             style={{
@@ -74,7 +78,7 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell}/>)}
+                    {new Array(14).fill().map(_=><ItemBlock handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
                 </div>
             </ScrollView>
         );
