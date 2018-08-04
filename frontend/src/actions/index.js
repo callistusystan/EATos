@@ -1,10 +1,10 @@
-export const SET_ACCOUNT = 'SET_ACCOUNT';
+export const SET_PROFILE = 'SET_PROFILE';
 export const SET_FOOD = 'SET_FOOD';
 export const SET_SALES = 'SET_SALES';
 
-export const setAccount = payload => {
+export const setProfile = payload => {
     return {
-        type: SET_ACCOUNT,
+        type: SET_PROFILE,
         payload: payload
     };
 };

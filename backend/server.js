@@ -32,7 +32,7 @@ io.on('getSales', getSales);
 io.on('createSale', createSale);
 io.on('processTransaction', processTransaction);
 
-function getFoods(accountName) {
+function getFoods(accountName, callback) {
     eos.getTableRows({
         code: EOS_CONFIG.contractName,
         scope: accountName,
@@ -132,7 +132,9 @@ function processTransaction({ curOwner, newOwner, qr_code, count, type_of_sale, 
             getSales();
             getFoods(curOwner);
             getFoods(newOwner);
-        })
+        }).catch(res => {
+
+        });
     })
 }
 
