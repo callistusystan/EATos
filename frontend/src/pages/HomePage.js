@@ -35,13 +35,13 @@ class HomePage extends Component {
                         to={'/scan'}
                         className={'bluepurple'}
                         style={{
-                            width: "100%",
+                            width: "90%",
                             minHeight: 100,
                             flex:1,
                             display: "flex",
-                            // borderRadius: 5,
-                            // marginTop:10,
-                            // marginBottom:5,
+                            borderRadius: 5,
+                            marginTop:10,
+                            marginBottom:5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -56,13 +56,13 @@ class HomePage extends Component {
                         to={'/inventory'}
                         className={'bluegreen'}
                         style={{
-                            width: "100%",
+                            width: "90%",
                             minHeight: 100,
                             flex:1,
                             display: "flex",
-                            // borderRadius: 5,
-                            // marginTop: 5,
-                            // marginBottom: 5,
+                            borderRadius: 5,
+                            marginTop: 5,
+                            marginBottom: 5,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -78,13 +78,13 @@ class HomePage extends Component {
                         to={'market'}
                         className={'orangeyellow'}
                         style={{
-                            width: "100%",
+                            width: "90%",
                             minHeight: 100,
                             flex:1,
                             display: "flex",
-                            // borderRadius: 5,
-                            // marginTop: 5,
-                            // marginBottom: 5,
+                            borderRadius: 5,
+                            marginTop: 5,
+                            marginBottom: 15,
                             justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
@@ -161,7 +161,7 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        background:"#fefcff"
+        background:"#480a87"
         // backgroundImage: `url(${Background})`,
         // backgroundPosition: 'center',
         // backgroundRepeat: 'no-repeat',

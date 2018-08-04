@@ -18,7 +18,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(140deg, #561dff, #5407ff, #c100f3);
+        background: linear-gradient(140deg, #561dff, #5407ff, #7208f3);
         background-size: 400% 400%;
         -webkit-animation: Gradient 15s ease-in-out infinite;
         -moz-animation: Gradient 15s ease-in-out infinite;
