@@ -6,7 +6,12 @@ import {GridLoader} from 'react-spinners';
 import Background from '../images/background.jpg';
 import Fade from "@material-ui/core/Fade/Fade"
 import { Link,withRouter } from 'react-router-dom';
-
+import QR from "../images/qrcode.svg"
+import fridge from '../images/fridge.svg'
+import shop from '../images/shopping-basket (1).svg'
+import users from '../images/users.svg'
+import Logo from "../components/Logo"
+import TopBar from '../components/TopBar';
 
 class HomePage extends Component {
 
@@ -33,88 +38,92 @@ class HomePage extends Component {
                     <Fade in timeout={200}>
                     <Link
                         to={'/scan'}
-                        className={'bluepurple'}
                         style={{
                             width: "90%",
                             minHeight: 100,
-                            flex:1,
+                            height:100,
                             display: "flex",
                             borderRadius: 5,
                             marginTop:10,
                             marginBottom:5,
-                            justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
-                            textDecoration:"none"
+                            textDecoration:"none",
+                            background:'#F97F51'
                         }}
                     >
-                        <h1>Scan</h1>
+                        <h1 style={{textAlign:'left',marginLeft:20}}>Scan</h1>
+                        <div style={{flex:1}}/>
+                        <img src={QR} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
                     <Fade in timeout={400}>
                     <Link
                         to={'/inventory'}
-                        className={'bluegreen'}
                         style={{
                             width: "90%",
                             minHeight: 100,
-                            flex:1,
+                            height:100,
                             display: "flex",
                             borderRadius: 5,
                             marginTop: 5,
                             marginBottom: 5,
-                            justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
-                            textDecoration:"none"
+                            textDecoration:"none",
+                            background:"#1B9CFC"
 
                         }}
                     >
-                        <h1>My Inventory</h1>
+                        <h1 style={{textAlign:'left',marginLeft:20}}>Inventory</h1>
+                        <div style={{flex:1}}/>
+                        <img src={fridge} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
                     <Fade in timeout={600}>
                     <Link
                         to={'market'}
-                        className={'realbluegreen'}
                         style={{
                             width: "90%",
                             minHeight: 100,
-                            flex:1,
+                            height:100,
                             display: "flex",
                             borderRadius: 5,
                             marginTop: 5,
                             marginBottom: 5,
-                            justifyContent: "center",
                             alignItems: "center",
                             color: "#fff",
-                            textDecoration:"none"
+                            textDecoration:"none",
+                            background:"#B33771"
 
                         }}
                     >
-                        <h1>Market Place</h1>
+                        <h1 style={{textAlign:'left',marginLeft:20}}>Market Place</h1>
+                        <div style={{flex:1}}/>
+                        <img src={shop} height={50} width={50} style={{marginRight:20}} alt=""/>
                     </Link>
                     </Fade>
                     <Fade in timeout={600}>
                         <Link
                             to={'profile'}
-                            className={'orangeyellow'}
                             style={{
                                 width: "90%",
                                 minHeight: 100,
-                                flex:1,
+                                height:100,
                                 display: "flex",
                                 borderRadius: 5,
                                 marginTop: 5,
                                 marginBottom: 15,
-                                justifyContent: "center",
                                 alignItems: "center",
                                 color: "#fff",
-                                textDecoration:"none"
+                                textDecoration:"none",
+                                background:"#3B3B98"
 
                             }}
                         >
-                            <h1>My Profile</h1>
+                            <h1 style={{textAlign:'left',marginLeft:20}}>Market Place</h1>
+                            <div style={{flex:1}}/>
+                            <img src={users} height={50} width={50} style={{marginRight:20}} alt=""/>
                         </Link>
                     </Fade>
                 </div>
@@ -125,34 +134,9 @@ class HomePage extends Component {
     render() {
         return (
             <div style={styles.container}>
-                <div
-                    className={"darkbluepurp"}
-                    style={{
-                        // height: 72,
-                        width: "100%",
-                        paddingTop: 30,
-                        display: "flex",
-                        boxShadow:"0px 0px 5px 0px #bbb",
-                        color:"#fff",
-                        paddingBottom:20
-                    }}
-
-                >
-                    <div style={{flex:1}}></div>
-                    <span style={{fontSize:30,justifySelf: "center"}}>Home</span>
-                    <div style={{flex:1}}></div>
-                </div>
+                <TopBar />
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
-                {/*<DeviceBar*/}
-                {/*title='Something'*/}
-                {/*position='bottom'*/}
-                {/*titleStyle={{*/}
-                {/*color: 'rgb(250, 250, 255)'*/}
-                {/*}}*/}
-                {/*style={{*/}
-                {/*borderColor: 'rgba(255, 255, 255, .2)'*/}
-                {/*}}*/}
-                {/*/>*/}
+                {/*<BottomBar />*/}
             </div>
         );
     }
@@ -164,7 +148,7 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        background:"#480a87"
+        background:"#fff"
         // backgroundImage: `url(${Background})`,
         // backgroundPosition: 'center',
         // backgroundRepeat: 'no-repeat',

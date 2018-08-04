@@ -8,6 +8,7 @@ import Fade from "@material-ui/core/Fade/Fade"
 import { Link } from 'react-router-dom';
 import BackIcon from "../images/back.svg"
 import UserIcon from "../images/User-icon.svg"
+import TopBar from "../components/TopBar";
 
 
 
@@ -38,6 +39,7 @@ class HomePage extends Component {
 
     handleUpload = () => {
         //handle upload
+        console.log(this.state.base64data)
     }
 
     componentDidMount() {
@@ -80,7 +82,6 @@ class HomePage extends Component {
                         </div>
                     </Fade>
                     <button
-                        disabled={this.state.base64data}
                         className={'orangeyellow'}
                         style={{
                             width: "90%",
@@ -126,41 +127,9 @@ class HomePage extends Component {
     render() {
         return (
             <div style={styles.container}>
-                <div
-                    className={"darkbluepurp"}
-                    style={{
-                        // height: 72,
-                        width: "100%",
-                        paddingTop: 30,
-                        display: "flex",
-                        boxShadow: "0px 0px 5px 0px #bbb",
-                        color: "#fff",
-                        alignItems: "center",
-                        paddingBottom:20
-                    }}
-
-                >
-                    <div style={{flex: 1, marginLeft: 10}}>
-                        <Link to={'/'}>
-                            <img src={BackIcon} width={25} height={25} alt=""/>
-                        </Link>
-                    </div>
-                    <span style={{fontSize: 30, justifySelf: "center"}}>Upload Image</span>
-                    <div style={{flex: 1}}></div>
-                </div>
-
-
+                <TopBar />
                 {this.state.ready ? this.renderBody() : this.renderLoading()}
-                {/*<DeviceBar*/}
-                {/*title='Something'*/}
-                {/*position='bottom'*/}
-                {/*titleStyle={{*/}
-                {/*color: 'rgb(250, 250, 255)'*/}
-                {/*}}*/}
-                {/*style={{*/}
-                {/*borderColor: 'rgba(255, 255, 255, .2)'*/}
-                {/*}}*/}
-                {/*/>*/}
+                {/*<BottomBar />*/}
             </div>
         );
     }
