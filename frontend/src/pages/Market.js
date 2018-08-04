@@ -62,8 +62,24 @@ class HomePage extends Component {
                             <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
                         </div>
                     </Fade>
-                    {new Array(7).fill().map(_=><ItemBlockGive handleOnSell={this.handleOnSell}/>)}
-                    {new Array(7).fill().map(_=><ItemBlockSell handleOnSell={this.handleOnSell}/>)}
+                    {new Array(7).fill().map(_=>
+                        <ItemBlockGive
+                            handleOnSell={this.handleOnSell}
+                            units={5}
+                            expiry_date={"7 August 2018"}
+                            price={15}
+                            seller={"Blockchain Cal"}
+                            food_name={"Chicken feet"}
+                        />
+                    )}
+                    {new Array(7).fill().map(_=><ItemBlockSell
+                        handleOnSell={this.handleOnSell}
+                        units={5}
+                        expiry_date={"7 August 2018"}
+                        price={15}
+                        seller={"Blockchain Cal"}
+                        food_name={"Chicken feet"}
+                    />)}
                 </div>
             </ScrollView>
         );

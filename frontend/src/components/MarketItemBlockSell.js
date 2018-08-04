@@ -12,6 +12,7 @@ class ItemBlock extends React.Component {
     }
 
     render() {
+        const {seller,food_name,expiry_date,units,price} = this.props
         return (
             <div style={{
                 display: "flex",
@@ -45,10 +46,10 @@ class ItemBlock extends React.Component {
                     <div
                         style={{display: "flex", flexDirection: "column", height: 45, justifyContent: "space-between"}}>
                         <div style={{color: "#515961"}}>
-                            <span style={{color:'#0b54ff',fontWeight:800,marginRight:5}}>$0</span>
-                            Free range extra large eggs
+                            <span style={{color:'#0b54ff',fontWeight:800,marginRight:5}}>${price}</span>
+                            {food_name} x {units}
                         </div>
-                        <div style={{fontSize: 14, color: "#d4d5d8"}}>Eggstreme Egg Co</div>
+                        <div style={{fontSize: 14, color: "#d4d5d8"}}>{seller}</div>
                     </div>
                     <div style={{flex: 1}}/>
                     <div style={{color: "#5d1ebe", fontSize: 10, marginRight: 20}}>
@@ -81,7 +82,7 @@ class ItemBlock extends React.Component {
                             <div style={{flex: 1}}/>
                             <div>
                                 <img src={Dislike} width={20} height={20} style={{marginRight: 5}} alt=""/>
-                                30 June 2018
+                                {expiry_date}
                             </div>
                         </div>
                         <div
