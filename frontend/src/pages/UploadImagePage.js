@@ -100,9 +100,10 @@ class HomePage extends Component {
                             alignItems: "center",
                             textDecoration:"none"
                         }}
+                        disabled={!this.state.base64data}
                         onClick={()=>this.handleUpload()}
                     >
-                        {this.state.base64data?<h3>Upload</h3>:undefined}
+                        {this.state.base64data?<h3>Upload</h3>:<h3>Please Select Image</h3>}
                     </Button>
                     {/*<Fade in timeout={800}>*/}
                     {/*<Link*/}

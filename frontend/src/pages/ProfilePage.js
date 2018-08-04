@@ -53,7 +53,7 @@ class HomePage extends Component {
                                 background:"#FC427B"
                             }}
                         >
-                            <h1>Your name is {uid||'Jeff'}</h1>
+                            <h1>{uid||'Unknown'}</h1>
                         </button>
                     </Fade>
                     {/*<Fade in timeout={800}>*/}
