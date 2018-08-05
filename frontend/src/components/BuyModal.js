@@ -10,13 +10,14 @@ class BuyModal extends React.Component {
             ...this.props.sale
         });
         console.log(this.props.food);
+        const { sale } = this.props;
         this.socket.emit('processTransaction', {
-            ...this.props.food,
-            seller: this.props.profile.name,
-            type_of_sale: this.props.type === 'give'? 2 : 1,
-            count: parseInt(this.state.count),
-            price: parseInt(this.state.price) || 0,
-            description: this.state.description
+            curOwner: sale.seller,
+            newOwner: this.props.profile.name,
+            qr_code: sale.qr_code,
+            count: sale.count,
+            type_of_sale: sale.type_of_sale,
+            sale_id: sale.sale_id
         });
 
         this.props.handleOnClose();
@@ -66,7 +67,7 @@ class BuyModal extends React.Component {
                             color:"#999999"
                         }}
                     >
-                        <span>{type} {food_name} x {units} for ${units*price}?</span>
+                        <span>{type} {sale.food_name} ({sale.count} {sale.units}) for ${sale.price}?</span>
                     </div>
                     <div style={{flex:1}}/>
                     <div

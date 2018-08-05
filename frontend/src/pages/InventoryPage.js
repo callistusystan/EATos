@@ -28,7 +28,7 @@ class HomePage extends Component {
 
     handleOnSell = (food) => {
         console.log(food);
-        this.setState({sellModalOpen: true, food})
+        this.setState({sellModalOpen: true, food, type: 'sell'})
     }
 
     handleOnGive = (food) => {
