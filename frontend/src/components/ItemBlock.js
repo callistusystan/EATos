@@ -44,7 +44,7 @@ class ItemBlock extends React.Component {
                 transition:'0.5s',
 
             }}
-                onClick={()=>this.setState({open:!this.state.open})}
+                onClick={()=>!this.props.disableClick&&this.setState({open:!this.state.open})}
             >
                 <div style={{display: 'flex', width: "100%",alignItems:"center"}}>
                     <img

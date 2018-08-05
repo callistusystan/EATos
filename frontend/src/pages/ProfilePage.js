@@ -7,6 +7,7 @@ import {withRouter} from 'react-router-dom';
 import UserIcon from "../images/User-icon.svg"
 import TopBar from "../components/TopBar";
 import {connect} from "react-redux"
+import ItemBlock from "../components/ItemBlock";
 
 
 class HomePage extends Component {
@@ -54,25 +55,10 @@ class HomePage extends Component {
                             <h1>{this.props.username||'Unknown'}</h1>
                         </button>
                     </Fade>
-                    {/*<Fade in timeout={800}>*/}
-                    {/*<Link*/}
-                    {/*to={'/'}*/}
-                    {/*className={'whiteyellow'}*/}
-                    {/*style={{*/}
-                    {/*minHeight: 100,*/}
-                    {/*flex:1,*/}
-                    {/*width: "90%",*/}
-                    {/*display: "flex",*/}
-                    {/*borderRadius: 5,*/}
-                    {/*marginTop: 5,*/}
-                    {/*marginBottom: 5,*/}
-                    {/*textDecoration:"none"*/}
-
-                    {/*}}*/}
-                    {/*>*/}
-
-                    {/*</Link>*/}
-                    {/*</Fade>*/}
+                    <h2 style={{width:"100%"}}>Carbon Footprint Saved</h2>
+                    <ItemBlock food_name={"Egg x 10 - Carbon Emission: 0.3kg"} disableClick qr_code={101}/>
+                    <ItemBlock food_name={"Kitkat x 3 - Carbon Emission: 0.13kg"} disableClick qr_code={102}/>
+                    <ItemBlock food_name={"Peanut Butter x 2 - Carbon Emission: 0.1kg "} disableClick qr_code={104}/>
                 </div>
             </ScrollView>
         );
