@@ -6,6 +6,7 @@ import Fade from "@material-ui/core/Fade/Fade"
 import {withRouter} from 'react-router-dom';
 import UserIcon from "../images/User-icon.svg"
 import TopBar from "../components/TopBar";
+import {connect} from "react-redux"
 
 
 class HomePage extends Component {
@@ -50,7 +51,7 @@ class HomePage extends Component {
                                 background:"#FC427B"
                             }}
                         >
-                            <h1>{uid||'Unknown'}</h1>
+                            <h1>{this.props.username||'Unknown'}</h1>
                         </button>
                     </Fade>
                     {/*<Fade in timeout={800}>*/}
@@ -102,4 +103,8 @@ const styles = {
     }
 };
 
-export default  withRouter(HomePage);
+const mapStateToProps = state =>({
+    username:state.profile.name
+})
+
+export default  withRouter(connect(mapStateToProps)(HomePage))
