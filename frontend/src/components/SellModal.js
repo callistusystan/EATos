@@ -56,7 +56,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
+                        <TextField type='number' min='0' step='1' fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
                     </div>
                     <div
                         style={{
@@ -66,7 +66,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter quantity'}/>
+                        <TextField type='number' min='0' step='1' fullWidth label={'Enter quantity'}/>
                     </div>
                     <div
                         style={{
