@@ -8,6 +8,15 @@ import ItemBlock from "../components/ItemBlock"
 import SellModal from "../components/SellModal"
 import TopBar from "../components/TopBar";
 
+import egg from "../images/egg.png"
+import kitkat from "../images/kitkat.jpeg"
+import heinzbeans from "../images/heinz.png"
+import peanutbutter from "../images/peanutbutter.jpeg"
+import chocolatepowder from "../images/chocolatepowder.png"
+
+
+const products = new Map([100,heinzbeans],[101,egg],[102,kitkat],[103,chocolatepowder],[104,peanutbutter])
+
 class HomePage extends Component {
 
     state = {
