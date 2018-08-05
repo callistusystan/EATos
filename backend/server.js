@@ -43,6 +43,7 @@ io.on('connection', client => {
     client.on('createSale', createSale);
     client.on('createFood', createFood);
     client.on('processTransaction', processTransaction);
+    client.on('disconnect',()=>numClients-=1)
 });
 
 function getFoods(accountName, callback) {
