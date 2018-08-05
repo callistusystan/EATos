@@ -25,10 +25,11 @@ class BuyModal extends React.Component {
 
     componentDidMount() {
         setTimeout(() => this.setState({ ready: true }), 1000);
-        this.socket = io('http://172.16.96.85:3300');
+        this.socket = openSocket('http://172.16.96.85:3300');
     }
 
     render() {
+        console.log(this.props);
         const {type, food_name, units, price, sale} = this.props
         return (
             <div

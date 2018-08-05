@@ -24,12 +24,15 @@ class HomePage extends Component {
     };
 
 
-    handleOnBuy = (food_name,units,price,seller, qr_code, sale) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Buy", sale})
+    handleOnBuy = (sale) => {
+        console.log('ON BUY', sale);
+        this.setState({sellModalOpen: true, type: "Buy", sale})
     }
 
-    handleOnClaim = (food_name,units,price,seller, qr_code, sale) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Sell", sale})
+    handleOnClaim = (sale) => {
+        console.log('ON BUY', sale);
+
+        this.setState({sellModalOpen: true, type: "Claim", sale})
     }
 
 
@@ -114,6 +117,7 @@ class HomePage extends Component {
                 {sales.map(sale =>
                     <ItemBlockSell
                         handler={this.handleOnBuy}
+                        sale={sale}
                         units={sale.units}
                         qr_code={sale.qr_code}
                         expiry_date={moment(sale.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
