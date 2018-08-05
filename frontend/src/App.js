@@ -32,17 +32,17 @@ class App extends Component {
         this.socket.close()
     }
 
-    // componentDidMount() {
-    //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
-    //         this.props.history.push('/');
-    //     }
-    // }!
-    //
-    // componentDidUpdate() {
-    //     if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
-    //         this.props.history.push('/');
-    //     }
-    // }
+    componentDidMount() {
+        if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
+            this.props.history.push('/');
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.location.pathname !== '/' && this.props.profile.name === null) {
+            this.props.history.push('/');
+        }
+    }
 
     render() {
         return (
