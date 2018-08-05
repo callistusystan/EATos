@@ -17,8 +17,13 @@ import heinzbeans from "../images/heinz.png"
 import peanutbutter from "../images/peanutbutter.jpeg"
 import chocolatepowder from "../images/chocolatepowder.png"
 
-
-const products = new Map([100,heinzbeans],[101,egg],[102,kitkat],[103,chocolatepowder],[104,peanutbutter])
+const products = {
+    100:heinzbeans,
+    101:egg,
+    102:kitkat,
+    103:chocolatepowder,
+    104:peanutbutter
+}
 
 class HomePage extends Component {
 
