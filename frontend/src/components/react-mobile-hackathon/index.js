@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import IPhoneX from './devices/IPhoneX';
-import { QRCode } from 'react-qr-svg';
+import QRCODE from "../../images/eosqr.png"
+import Logo from "../Logo"
 
 let is_safari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 let is_chrome = /Chrome|CriOS/.test(navigator.userAgent);
@@ -32,23 +33,15 @@ class MobileHackathon extends Component {
                         width: 400,
                         display: 'none',
                         flexDirection: 'column',
+                        justifyContent:"center",
+                        alignItems:"center",
                         padding: 16
                     }}
                 >
-                    <h1 style={{ fontSize: 40 }}>{this.props.appName || 'React App'}</h1>
+                    <Logo/>
                     <p style={{ fontSize: 28, color: '#555' }}>Try it out!</p>
-                    <QRCode
-                        bgColor="#FFFFFF"
-                        fgColor="#000000"
-                        level="Q"
-                        style={{
-                            marginTop: 16,
-                            width: 256,
-                            alignSelf: 'center'
-                        }}
-                        value={this.props.url || 'http://localhost:3000/'}
-                    />
-                    <a href={this.props.url || 'http://localhost:3000/'} style={{ fontSize: 24, letterSpacing: 2, color: '#007BFF', marginTop: 16, alignSelf: 'center' }}>{this.props.displayUrl || 'react-app.com'}</a>
+                    <img src={QRCODE} style={{width:350,height:350}} alt=""/>
+                    <a href={this.props.url || 'http://172.16.96.85:3000'} style={{ fontSize:15, letterSpacing: 2, color: '#007BFF', marginTop: 16, alignSelf: 'center' }}>{this.props.displayUrl || 'http://172.16.96.85:3000'}</a>
                 </div>
             </div>
         );

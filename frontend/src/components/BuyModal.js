@@ -1,14 +1,29 @@
 import React from "react"
+import { connect } from 'react-redux';
 
 
 class BuyModal extends React.Component {
 
     handleOnConfirm = () => {
         console.log("confirm")
+        console.log({
+            ...this.props.sale
+        });
+        console.log(this.props.food);
+        this.socket.emit('processTransaction', {
+            ...this.props.food,
+            seller: this.props.profile.name,
+            type_of_sale: this.props.type === 'give'? 2 : 1,
+            count: parseInt(this.state.count),
+            price: parseInt(this.state.price) || 0,
+            description: this.state.description
+        });
+
+        this.props.handleOnClose();
     }
 
     render() {
-        const {type, food_name, units, price} = this.props
+        const {type, food_name, units, price, sale} = this.props
         return (
             <div
 
@@ -102,4 +117,4 @@ class BuyModal extends React.Component {
     }
 }
 
-export default BuyModal
+export default connect(({profile}) =>({profile}))(BuyModal)

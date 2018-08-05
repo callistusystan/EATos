@@ -19,16 +19,17 @@ class HomePage extends Component {
         giveModalOpen: false,
         currentItemName: null,
         type: null,
-        sales: []
+        sales: [],
+        sale: null
     };
 
 
-    handleOnBuy = (food_name,units,price,seller, qr_code) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Buy"})
+    handleOnBuy = (food_name,units,price,seller, qr_code, sale) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Buy", sale})
     }
 
-    handleOnClaim = (food_name,units,price,seller, qr_code) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Sell"})
+    handleOnClaim = (food_name,units,price,seller, qr_code, sale) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Sell", sale})
     }
 
 
@@ -133,6 +134,7 @@ class HomePage extends Component {
                     {this.state.sellModalOpen &&
                     <SellModal
                         handleOnClose={this.handleOnClose}
+                        sale={this.state.sale}
                         qr_code={this.state.qr_code}
                         itemName={this.state.currentItemName}
                         type={this.state.type}

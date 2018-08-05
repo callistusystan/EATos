@@ -46,7 +46,7 @@ class App extends Component {
 
     render() {
         return (
-            <MobileHackathon appName='EOS' >
+            <MobileHackathon appName='EATos' >
                 <Switch>
                     <Route path='/inventory' component={InventoryPage} />
                     <Route path='/market' component={MarketPlacePage} />

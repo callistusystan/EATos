@@ -3,7 +3,7 @@ import ShoppingBasket from "../images/shopping-basket.svg"
 import Dislike from "../images/thumb-down-outline-symbol.svg"
 import Smile from "../images/smile.svg"
 import Dollar from "../images/coin.svg"
-import Fade from "@material-ui/core/es/Fade/Fade";
+import Fade from "@material-ui/core/Fade/Fade";
 
 
 import egg from "../images/egg.png"
