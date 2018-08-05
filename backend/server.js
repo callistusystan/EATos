@@ -22,7 +22,13 @@ var NAME_TO_SOCKET = {};
 
 getSales();
 
+let numClients = 0
+
 io.on('connection', client => {
+    if(numClients > 50){
+        return
+    }
+    numClients+=1
     client.emit('getSales', SALES);
 
     client.on('createAcc', createAcc);
@@ -76,7 +82,7 @@ function createAcc(accountName, callback) {
             receiver: 'myaccount',
             bytes: 8192
         })
-    
+
         tr.delegatebw({
             from: 'eosio',
             receiver: 'myaccount',
@@ -84,14 +90,14 @@ function createAcc(accountName, callback) {
             stake_cpu_quantity: '10.0000 SYS',
             transfer: 0
         })
-    }).then(res => {    
+    }).then(res => {
         eos.contract(EOS_CONFIG.contractName).then((contract) => {
             contract.createacc(
                 accountName,
                 { authorization: [accountName] }
             ).then(res => {
                 console.log('RES', res);
-                
+
                 callback(true);
             }).catch(err => {
                 callback(false);
@@ -106,12 +112,12 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
     eos.contract(EOS_CONFIG.contractName).then((contract) => {
         contract.createsale(
             {
-                seller: seller || 'callistus', 
-                sale_id: SALES.length+1, 
-                type_of_sale, 
-                qr_code, 
+                seller: seller || 'callistus',
+                sale_id: SALES.length+1,
+                type_of_sale,
+                qr_code,
                 count,
-                price, 
+                price,
                 description
             },
             { authorization: [seller || 'callistus'] }
@@ -127,12 +133,12 @@ function createFood({ curOwner, qr_code, food_name, expiry_date, location, image
         console.log('CREATING FOOD');
         contract.createfood(
             {
-                curOwner: curOwner || 'callistus', 
-                qr_code, 
-                food_name, 
-                expiry_date, 
+                curOwner: curOwner || 'callistus',
+                qr_code,
+                food_name,
+                expiry_date,
                 location,
-                image: '', 
+                image: '',
                 count,
                 units,
                 price
