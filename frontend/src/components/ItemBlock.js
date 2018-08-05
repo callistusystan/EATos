@@ -5,6 +5,21 @@ import Smile from "../images/smile.svg"
 import Dollar from "../images/coin.svg"
 import Fade from "@material-ui/core/es/Fade/Fade";
 
+
+import egg from "../images/egg.png"
+import kitkat from "../images/kitkat.jpeg"
+import heinzbeans from "../images/heinz.png"
+import peanutbutter from "../images/peanutbutter.jpeg"
+import chocolatepowder from "../images/chocolatepowder.png"
+
+const products = {
+    100:heinzbeans,
+    101:egg,
+    102:kitkat,
+    103:chocolatepowder,
+    104:peanutbutter
+}
+
 class ItemBlock extends React.Component {
     state = {
         open: false,
@@ -12,7 +27,7 @@ class ItemBlock extends React.Component {
     }
 
     render() {
-        const {food_name,expiry_date, food_amount} = this.props
+        const {food_name,expiry_date, food_amount, qr_code} = this.props
         return (
             <div style={{
                 display: "flex",
@@ -31,9 +46,9 @@ class ItemBlock extends React.Component {
                 onClick={()=>this.setState({open:!this.state.open})}
             >
                 <div style={{display: 'flex', width: "100%",alignItems:"center"}}>
-                    <div
+                    <img
+                        src={products[`${qr_code}`]}
                         style={{
-                            background: "#000",
                             width: 50,
                             height: 50,
                             borderRadius: 25,
