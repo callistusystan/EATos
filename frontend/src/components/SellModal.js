@@ -3,6 +3,14 @@ import TextField from "@material-ui/core/es/TextField/TextField";
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 
+const isNumberKey = (evt) =>
+{
+    const charCode = (evt.which) ? evt.which : evt.keyCode
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+
+
+}
+
 class SellModal extends React.Component {
 
     state = {
@@ -86,7 +94,6 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField type='number' min='0' step='1' value={this.state.price} onChange={e => this.setState({ price: e.target.value })} fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
                     </div>
                     <div
                         style={{
@@ -96,7 +103,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField type='number' min='0' step='1' value={this.state.count} onChange={e => this.setState({ count: e.target.value })} fullWidth label={'Enter quantity'}/>
+                        <TextField onKeyPress={e=>{if(!isNumberKey(e))e.preventDefault()}} type='number' min='0' step='1' value={this.state.count} onChange={e => this.setState({ count: e.target.value })} fullWidth label={'Enter quantity'}/>
                     </div>
                     <div
                         style={{
