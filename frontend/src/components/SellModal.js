@@ -1,6 +1,13 @@
 import React from "react"
 import TextField from "@material-ui/core/es/TextField/TextField";
 
+const isNumberKey = (evt) =>
+{
+    const charCode = (evt.which) ? evt.which : evt.keyCode
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+
+
+}
 
 class SellModal extends React.Component {
 
@@ -56,7 +63,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
+                        <TextField onKeyPress={e=>{if(!isNumberKey(e))e.preventDefault()}} type='number' min='0' step='1' fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
                     </div>
                     <div
                         style={{
@@ -66,7 +73,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter quantity'}/>
+                        <TextField onKeyPress={e=>{if(!isNumberKey(e))e.preventDefault()}} type='number' min='0' step='1' fullWidth label={'Enter quantity'}/>
                     </div>
                     <div
                         style={{

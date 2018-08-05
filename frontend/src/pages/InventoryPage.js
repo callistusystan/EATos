@@ -11,20 +11,6 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import egg from "../images/egg.png"
-import kitkat from "../images/kitkat.jpeg"
-import heinzbeans from "../images/heinz.png"
-import peanutbutter from "../images/peanutbutter.jpeg"
-import chocolatepowder from "../images/chocolatepowder.png"
-
-const products = {
-    100:heinzbeans,
-    101:egg,
-    102:kitkat,
-    103:chocolatepowder,
-    104:peanutbutter
-}
-
 class HomePage extends Component {
 
     constructor(props) {
@@ -35,17 +21,17 @@ class HomePage extends Component {
             ready: false,
             sellModalOpen: false,
             giveModalOpen: false,
-            currentItemName: null,
+            food: null,
             foods: []
         };
     }
 
-    handleOnSell = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName, type:'sell'})
+    handleOnSell = () => {
+        this.setState({sellModalOpen: true, food: this.props.food})
     }
 
-    handleOnGive = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName, type:'give'})
+    handleOnGive = () => {
+        this.setState({sellModalOpen: true, food: this.props.food, type:'give'})
     }
 
     handleOnClose = () => {
@@ -99,6 +85,8 @@ class HomePage extends Component {
                 {expiringFood.map(food => (
                     <ItemBlock
                         key={food.qr_code}
+                        food={food}
+                        qr_code={food.qr_code}
                         expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
                         food_name={food.food_name}
                         food_amount={`${food.count} ${food.units}`}
@@ -134,6 +122,8 @@ class HomePage extends Component {
                 {goodFood.map(food => (
                     <ItemBlock
                         key={food.qr_code}
+                        food={food}
+                        qr_code={food.qr_code}
                         expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
                         food_name={food.food_name}
                         food_amount={`${food.count} ${food.units}`}
