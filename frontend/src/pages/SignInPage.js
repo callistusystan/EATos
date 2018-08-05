@@ -63,8 +63,8 @@ class SignInPage extends Component {
                             <h1 style={{ letterSpacing: 4, marginBottom: 8 }}>My name is</h1>
                             <TextField fullWidth value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
                             <div style={{ display: 'flex', marginTop: 8, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ color: '#555' }}>Enter at least 6 characters <br />(lower case letters or digits)</span>
-                                <Button type='submit' variant="outlined"  disabled={this.state.name === '' || !this.state.name.match(/[a-z0-9]{6,}/)} onClick={this.createAccount} style={{ alignSelf: 'flex-end' }}>START</Button>
+                                <span style={{ color: '#555' }}>Enter 6 - 12 characters <br />(lower case letters or digits)</span>
+                                <Button type='submit' variant="outlined"  disabled={this.state.name === '' || !this.state.name.match(/[a-z0-9]{6,12}/)} onClick={this.createAccount} style={{ alignSelf: 'flex-end' }}>START</Button>
                             </div>
                             {this.state.error && <p style={{ marginTop: 4, color: 'red' }}>Error: Username has been taken!</p>}
                         </div>
