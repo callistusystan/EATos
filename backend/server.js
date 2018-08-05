@@ -102,7 +102,9 @@ function createAcc(accountName, callback) {
     });
 }
 
-function createSale({ seller, type_of_sale, qr_code, count, price, description }) {
+function createSale(args) {
+    const { seller, type_of_sale, qr_code, count, price, description } = args;
+    console.log('CREATING SALES', args);
     eos.contract(EOS_CONFIG.contractName).then((contract) => {
         contract.createsale(
             {
@@ -117,6 +119,8 @@ function createSale({ seller, type_of_sale, qr_code, count, price, description }
             { authorization: [seller || 'callistus'] }
         ).then(res => {
             getSales();
+        }).catch(err => {
+            console.log(err);
         });
     });
 }

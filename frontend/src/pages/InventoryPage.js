@@ -139,7 +139,7 @@ class HomePage extends Component {
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 8}}>
                     {this.state.sellModalOpen &&
-                    <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
+                    <SellModal food={this.props.food} handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
                     }
                     {this.renderAboutToExpire()}
                     <div style={{height: 8}} />

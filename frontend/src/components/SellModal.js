@@ -1,18 +1,48 @@
 import React from "react"
 import TextField from "@material-ui/core/es/TextField/TextField";
-
+import openSocket from 'socket.io-client';
+import { connect } from 'react-redux';
 
 class SellModal extends React.Component {
 
+    state = {
+        count: '',
+        price: '',
+        description: ''
+    };
+
+    componentDidMount(){
+        this.socket= openSocket('http://172.16.96.85:3300');
+    }
+
+    componentWillUnmount(){
+        this.socket.close()
+    }
+
     handleOnConfirm = () => {
         console.log("confirm")
-    }
+        console.log({
+            ...this.props.food,
+            seller: this.props.profile.name,
+            type_of_sale: this.props.type === 'give'? 2 : 1,
+            count: this.state.count,
+            price: this.state.price,
+            description: this.state.description
+        });
+        this.socket.emit('createSale', {
+            ...this.props.food,
+            seller: 1,
+            type_of_sale: this.props.type === 'give'? 2 : 1,
+            count: parseInt(this.state.count),
+            price: parseInt(this.state.price),
+            description: this.state.description
+        });
+    };
 
     render() {
         const {type} = this.props
         return (
             <div
-
                 style={{
                     display: "flex",
                     width: "100%",
@@ -56,7 +86,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField type='number' min='0' step='1' fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
+                        <TextField type='number' min='0' step='1' value={this.state.price} onChange={e => this.setState({ price: e.target.value })} fullWidth label={'Enter price ($)'} value={type==="give"?0:undefined} disabled={type==='give'}/>
                     </div>
                     <div
                         style={{
@@ -66,7 +96,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField type='number' min='0' step='1' fullWidth label={'Enter quantity'}/>
+                        <TextField type='number' min='0' step='1' value={this.state.count} onChange={e => this.setState({ count: e.target.value })} fullWidth label={'Enter quantity'}/>
                     </div>
                     <div
                         style={{
@@ -76,7 +106,7 @@ class SellModal extends React.Component {
                             marginBottom:20
                         }}
                     >
-                        <TextField fullWidth label={'Enter description'}/>
+                        <TextField fullWidth value={this.state.description} onChange={e => this.setState({ description: e.target.value })} label={'Enter description'}/>
                     </div>
                     <div
                         style={{
@@ -133,4 +163,6 @@ class SellModal extends React.Component {
     }
 }
 
-export default SellModal
+const mapState = ({ profile }) => ({ profile });
+
+export default connect(mapState)(SellModal);
