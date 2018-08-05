@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux';
-
+import openSocket from 'socket.io-client';
 
 class BuyModal extends React.Component {
 
@@ -20,6 +20,12 @@ class BuyModal extends React.Component {
         });
 
         this.props.handleOnClose();
+    }
+
+
+    componentDidMount() {
+        setTimeout(() => this.setState({ ready: true }), 1000);
+        this.socket = io('http://172.16.96.85:3300');
     }
 
     render() {
