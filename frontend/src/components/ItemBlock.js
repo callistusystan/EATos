@@ -12,7 +12,7 @@ class ItemBlock extends React.Component {
     }
 
     render() {
-        const {food_name,expiry_date} = this.props
+        const {food_name,expiry_date, food_amount} = this.props
         return (
             <div style={{
                 display: "flex",
@@ -43,7 +43,7 @@ class ItemBlock extends React.Component {
                             marginTop: 5,
                         }}
                     />
-                    <div style={{color: "#515961"}}>{food_name}</div>
+                    <div style={{color: "#515961", marginRight: 8}}>{food_name}<br/><span style={{ fontSize: 14 }}>{food_amount}</span></div>
                     <div style={{flex: 1}}/>
                     <div style={{color: "#5d1ebe", fontSize: 10, marginRight: 20}}>
                         2 Days

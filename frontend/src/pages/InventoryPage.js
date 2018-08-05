@@ -57,9 +57,8 @@ class HomePage extends Component {
         setTimeout(() => this.setState({ ready: true }), 1000);
         this.socket = io('http://localhost:3300');
         this.socket.emit('getFoods', this.props.profile.name);
-        this.socket.on('getFoods', (res) => {
-            console.log(res);
-            this.setState({ foods: res });
+        this.socket.on('getFoods', ({ rows }) => {
+            this.setState({ foods: rows });
         });
     }
 
@@ -76,56 +75,85 @@ class HomePage extends Component {
     };
 
     renderAboutToExpire = () => {
+        console.log(this.state.foods);
         const expiringFood = this.state.foods.filter(food => {
 
             const noOfDays = moment(food.expiry_date, 'YYYY-MM-DD').diff(moment(), 'days');
-            console.log(food.expiryDate, noOfDays);
+            console.log(food.expiry_date, noOfDays);
             return noOfDays <= 3;
         });
-        return expiringFood.map(food => (
-            <ItemBlock
-                key={food.qr_code}
-                expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MON YYYY')}
-                food_name={food.name}
-                handleOnSell={this.handleOnSell}
-                handleOnGive={this.handleOnGive}
-            />
-        ));
+        return (
+            <div style={{ width: '100%' }}>
+                <Fade in timeout={200}>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "100%"
+                        }}
+                    >
+                        <h4 style={{paddingLeft: 10, color: "red"}}>About to expire</h4>
+                        <span style={{flex: 1}}/>
+                        <h4 style={{paddingRight: 10, color: "red", fontWeight: 500}}>{expiringFood.length} items</h4>
+                    </div>
+                </Fade>
+                {expiringFood.map(food => (
+                    <ItemBlock
+                        key={food.qr_code}
+                        expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
+                        food_name={food.food_name}
+                        food_amount={`${food.count} ${food.units}`}
+                        handleOnSell={this.handleOnSell}
+                        handleOnGive={this.handleOnGive}
+                    />))}
+            </div>
+        );
+    };
+
+    renderGood = () => {
+        console.log(this.state.foods);
+        const goodFood = this.state.foods.filter(food => {
+
+            const noOfDays = moment(food.expiry_date, 'YYYY-MM-DD').diff(moment(), 'days');
+            console.log(food.expiry_date, noOfDays);
+            return noOfDays > 3;
+        });
+        return (
+            <div style={{ width: '100%' }}>
+                <Fade in timeout={200}>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "100%"
+                        }}
+                    >
+                        <h4 style={{paddingLeft: 10, color: "#515961"}}>Other</h4>
+                        <span style={{flex: 1}}/>
+                        <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>{goodFood.length} items</h4>
+                    </div>
+                </Fade>
+                {goodFood.map(food => (
+                    <ItemBlock
+                        key={food.qr_code}
+                        expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
+                        food_name={food.food_name}
+                        food_amount={`${food.count} ${food.units}`}
+                        handleOnSell={this.handleOnSell}
+                        handleOnGive={this.handleOnGive}
+                    />))}
+            </div>
+        );
     };
 
     renderBody = () => {
         return (
             <ScrollView isDark>
-                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 16}}>
+                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 8}}>
                     {this.state.sellModalOpen &&
                     <SellModal handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
                     }
-                    <Fade in timeout={200}>
-                        <div
-                            style={{
-                                display: "flex",
-                                width: "100%"
-                            }}
-                        >
-                            <h4 style={{paddingLeft: 10, color: "#515961"}}>About to expire</h4>
-                            <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
-                        </div>
-                    </Fade>
                     {this.renderAboutToExpire()}
-                    <Fade in timeout={200}>
-                        <div
-                            style={{
-                                display: "flex",
-                                width: "100%"
-                            }}
-                        >
-                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Other inventory</h4>
-                            <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
-                        </div>
-                    </Fade>
-                    {new Array(14).fill().map(_=><ItemBlock expiry_date={"6 August 2018"} food_name={"Food Name"} handleOnSell={this.handleOnSell} handleOnGive={this.handleOnGive}/>)}
+                    <div style={{height: 8}} />
+                    {this.renderGood()}
                 </div>
             </ScrollView>
         );
