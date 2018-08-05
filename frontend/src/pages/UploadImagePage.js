@@ -168,6 +168,7 @@ class HomePage extends Component {
                         <CircularProgress />
                     </div> :
                     <Button
+                        disabled={!this.state.base64data }
                         fullWidth
                         variant='outlined'
                         style={{
@@ -193,7 +194,7 @@ class HomePage extends Component {
                             }, 2000);
                         }}
                     >
-                        {this.state.base64data ? <h3>Scan</h3> : undefined}
+                        {this.state.base64data ? <h3>Scan</h3> : <h3>Please upload photo</h3>}
                     </Button>
                 }
             </div>
