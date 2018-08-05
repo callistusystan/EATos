@@ -21,17 +21,17 @@ class HomePage extends Component {
             ready: false,
             sellModalOpen: false,
             giveModalOpen: false,
-            currentItemName: null,
+            food: null,
             foods: []
         };
     }
 
-    handleOnSell = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName, type:'sell'})
+    handleOnSell = () => {
+        this.setState({sellModalOpen: true, food: this.props.food})
     }
 
-    handleOnGive = (currentItemName) => {
-        this.setState({sellModalOpen: true,currentItemName, type:'give'})
+    handleOnGive = () => {
+        this.setState({sellModalOpen: true, food: this.props.food, type:'give'})
     }
 
     handleOnClose = () => {
@@ -85,6 +85,7 @@ class HomePage extends Component {
                 {expiringFood.map(food => (
                     <ItemBlock
                         key={food.qr_code}
+                        food={food}
                         qr_code={food.qr_code}
                         expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
                         food_name={food.food_name}
@@ -121,6 +122,7 @@ class HomePage extends Component {
                 {goodFood.map(food => (
                     <ItemBlock
                         key={food.qr_code}
+                        food={food}
                         qr_code={food.qr_code}
                         expiry_date={moment(food.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
                         food_name={food.food_name}

@@ -27,7 +27,7 @@ class ItemBlock extends React.Component {
     }
 
     render() {
-        const {food_name,expiry_date, food_amount, qr_code} = this.props
+        const {food, food_name,expiry_date, food_amount, qr_code} = this.props
         return (
             <div style={{
                 display: "flex",
@@ -112,7 +112,7 @@ class ItemBlock extends React.Component {
                             alignItems: "center",
                             border:"1.5px solid #0b54ff"
                         }}
-                            onClick={()=>this.props.handleOnBuy('Free range extra large eggs')}
+                            onClick={()=>this.props.handleOnSell(food)}
                         >
                             <img src={Dollar} style={{width: 25, height: 25}} alt=""/>
                             <span style={{marginLeft: 10, color:"#0b54ff"}}>Sell</span>

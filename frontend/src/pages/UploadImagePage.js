@@ -29,8 +29,8 @@ const FOOD = [
         expiry_date: '2018-08-07',
         location: '100m away',
         image: '',
-        count: 1,
-        units: 'dozen',
+        count: 12,
+        units: 'eggs',
         price: 4
     },
     {
