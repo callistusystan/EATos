@@ -26,12 +26,14 @@ class HomePage extends Component {
         };
     }
 
-    handleOnSell = () => {
-        this.setState({sellModalOpen: true, food: this.props.food})
+    handleOnSell = (food) => {
+        console.log(food);
+        this.setState({sellModalOpen: true, food})
     }
 
-    handleOnGive = () => {
-        this.setState({sellModalOpen: true, food: this.props.food, type:'give'})
+    handleOnGive = (food) => {
+        console.log(food);
+        this.setState({sellModalOpen: true, food, type:'give'})
     }
 
     handleOnClose = () => {
@@ -139,7 +141,7 @@ class HomePage extends Component {
             <ScrollView isDark>
                 <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 8}}>
                     {this.state.sellModalOpen &&
-                    <SellModal food={this.props.food} handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
+                    <SellModal food={this.state.food} handleOnClose={this.handleOnClose} itemName={this.state.currentItemName} type={this.state.type}/>
                     }
                     {this.renderAboutToExpire()}
                     <div style={{height: 8}} />

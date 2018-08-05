@@ -37,14 +37,17 @@ class SellModal extends React.Component {
             price: this.state.price,
             description: this.state.description
         });
+        console.log(this.props.food);
         this.socket.emit('createSale', {
             ...this.props.food,
-            seller: 1,
+            seller: this.props.profile.name,
             type_of_sale: this.props.type === 'give'? 2 : 1,
             count: parseInt(this.state.count),
-            price: parseInt(this.state.price),
+            price: parseInt(this.state.price) || 0,
             description: this.state.description
         });
+
+        this.props.handleOnClose();
     };
 
     render() {
@@ -105,6 +108,19 @@ class SellModal extends React.Component {
                     >
                         <TextField onKeyPress={e=>{if(!isNumberKey(e))e.preventDefault()}} type='number' min='0' step='1' value={this.state.count} onChange={e => this.setState({ count: e.target.value })} fullWidth label={'Enter quantity'}/>
                     </div>
+
+
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "90%",
+                            justifyContent:"center",
+                            marginBottom:20
+                        }}
+                    >
+                        <TextField onKeyPress={e=>{if(!isNumberKey(e))e.preventDefault()}} type='number' min='0' step='1' fullWidth label={'Enter price ($)'} value={type==="give"?0:this.state.price} onChange={e => this.setState({ price: e.target.value })} disabled={type==='give'}/>
+                    </div>
+
                     <div
                         style={{
                             display: "flex",

@@ -84,7 +84,6 @@ class HomePage extends Component {
     componentDidMount(){
         setTimeout(() => this.setState({ready: true}), 1000);
         this.socket = io('http://localhost:3300');
-        this.socket.emit('getSales', {});
     }
 
     componentWillUnmount(){

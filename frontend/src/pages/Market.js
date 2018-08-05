@@ -8,6 +8,8 @@ import ItemBlockGive from "../components/MarketItemBlockGive"
 import ItemBlockSell from "../components/MarketItemBlockSell"
 import SellModal from "../components/BuyModal"
 import TopBar from "../components/TopBar";
+import openSocket from 'socket.io-client';
+import moment from 'moment/moment';
 
 class HomePage extends Component {
 
@@ -16,16 +18,17 @@ class HomePage extends Component {
         sellModalOpen: false,
         giveModalOpen: false,
         currentItemName: null,
-        type: null
+        type: null,
+        sales: []
     };
 
 
-    handleOnBuy = (food_name,units,price,seller) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, type: "Buy"})
+    handleOnBuy = (food_name,units,price,seller, qr_code) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Buy"})
     }
 
-    handleOnClaim = (food_name,units,price,seller) => {
-        this.setState({sellModalOpen: true, food_name,units,price,seller, type: "Sell"})
+    handleOnClaim = (food_name,units,price,seller, qr_code) => {
+        this.setState({sellModalOpen: true, food_name,units,price,seller, qr_code, type: "Sell"})
     }
 
 
@@ -33,9 +36,17 @@ class HomePage extends Component {
         this.setState({sellModalOpen: false, giveModalOpen: false})
     }
 
-
-    componentDidMount() {
+    componentDidMount(){
+        this.socket= openSocket('http://172.16.96.85:3300');
+        this.socket.emit('getSales', {});
+        this.socket.on('getSales', sales => {
+            this.setState({ sales });
+        });
         setTimeout(() => this.setState({ready: true}), 1000);
+    }
+
+    componentWillUnmount(){
+        this.socket.close()
     }
 
     renderLoading = () => {
@@ -46,13 +57,83 @@ class HomePage extends Component {
         );
     };
 
+    renderDonations = () => {
+        console.log(this.state.sales);
+        const donations = this.state.sales.filter(sale => sale.type_of_sale === 2);
+
+        return (
+            <div style={{ width: '100%' }}>
+                <Fade in timeout={200}>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "100%"
+                        }}
+                    >
+                        <h4 style={{paddingLeft: 10, color: "#515961"}}>Free Items</h4>
+                        <span style={{flex: 1}}/>
+                        <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>{donations.length} items</h4>
+                    </div>
+                </Fade>
+                {donations.map(sale =>
+                    <ItemBlockGive
+                        handler={this.handleOnClaim}
+                        sale={sale}
+                        qr_code={sale.qr_code}
+                        units={sale.units}
+                        expiry_date={moment(sale.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
+                        count={sale.count}
+                        price={0}
+                        seller={sale.seller}
+                        food_name={sale.food_name}
+                    />
+                )}
+            </div>
+        );
+    };
+
+    renderSales = () => {
+        console.log(this.state.sales);
+        const sales = this.state.sales.filter(sale => sale.type_of_sale === 1);
+
+        return (
+            <div style={{ width: '100%' }}>
+                <Fade in timeout={200}>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "100%"
+                        }}
+                    >
+                        <h4 style={{paddingLeft: 10, color: "#515961"}}>Items on the market</h4>
+                        <span style={{flex: 1}}/>
+                        <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>{sales.length} items</h4>
+                    </div>
+                </Fade>
+                {sales.map(sale =>
+                    <ItemBlockSell
+                        handler={this.handleOnBuy}
+                        units={sale.units}
+                        qr_code={sale.qr_code}
+                        expiry_date={moment(sale.expiry_date, 'YYYY-MM-DD').format('DD MMM YYYY')}
+                        price={sale.price}
+                        count={sale.count}
+                        seller={sale.seller}
+                        food_name={sale.food_name}
+                    />
+                )}
+            </div>
+        );
+    };
+
     renderBody = () => {
         return (
             <ScrollView isDark>
-                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center"}}>
+                <div style={{minHeight: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", padding: 8}}>
                     {this.state.sellModalOpen &&
                     <SellModal
                         handleOnClose={this.handleOnClose}
+                        qr_code={this.state.qr_code}
                         itemName={this.state.currentItemName}
                         type={this.state.type}
                         food_name={this.state.food_name}
@@ -61,43 +142,15 @@ class HomePage extends Component {
                         seller={this.state.seller}
                     />
                     }
-                    <Fade in timeout={200}>
-                        <div
-                            style={{
-                                display: "flex",
-                                width: "100%"
-                            }}
-                        >
-                            <h4 style={{paddingLeft: 10, color: "#515961"}}>Items on the market</h4>
-                            <span style={{flex: 1}}/>
-                            <h4 style={{paddingRight: 10, color: "#a2a3a6", fontWeight: 500}}>14 items</h4>
-                        </div>
-                    </Fade>
-                    {new Array(7).fill().map(_ =>
-                        <ItemBlockGive
-                            handler={this.handleOnBuy}
-                            units={5}
-                            expiry_date={"7 August 2018"}
-                            price={0}
-                            seller={"Blockchain Cal"}
-                            food_name={"Chicken feet"}
-                        />
-                    )}
-                    {new Array(7).fill().map(_ =>
-                        <ItemBlockSell
-                            handler={this.handleOnClaim}
-                            units={5}
-                            expiry_date={"7 August 2018"}
-                            price={15}
-                            seller={"Blockchain Cal"}
-                            food_name={"Chicken feet"}
-                        />)}
+                    {this.renderDonations()}
+                    {this.renderSales()}
                 </div>
             </ScrollView>
         );
     };
 
     render() {
+        console.log(this.state);
         return (
             <div style={styles.container}>
                 <TopBar/>

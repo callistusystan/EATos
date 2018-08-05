@@ -27,6 +27,7 @@ class ItemBlock extends React.Component {
     }
 
     render() {
+
         const {food, food_name,expiry_date, food_amount, qr_code} = this.props
         return (
             <div style={{
@@ -112,7 +113,11 @@ class ItemBlock extends React.Component {
                             alignItems: "center",
                             border:"1.5px solid #0b54ff"
                         }}
-                            onClick={()=>this.props.handleOnSell(food)}
+                            onClick={
+                                ()=>{
+                                    console.log('SELL CLICK');
+                                    this.props.handleOnSell({...food,qr_code})
+                                }}
                         >
                             <img src={Dollar} style={{width: 25, height: 25}} alt=""/>
                             <span style={{marginLeft: 10, color:"#0b54ff"}}>Sell</span>
@@ -128,7 +133,7 @@ class ItemBlock extends React.Component {
                             justifyContent: "center",
                             alignItems: "center"
                         }}
-                            onClick={()=>this.props.handleOnGive('Free range extra large eggs')}
+                            onClick={()=>this.props.handleOnGive({...food, qr_code})}
                         >
                             <img src={Smile} style={{width: 25, height: 25}} alt=""/>
                             <span style={{marginLeft: 10,color:"#6a0bff"}}>Give</span>

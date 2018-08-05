@@ -119,6 +119,7 @@ function createSale(args) {
             { authorization: [seller || 'callistus'] }
         ).then(res => {
             getSales();
+            getFoods(seller);
         }).catch(err => {
             console.log(err);
         });

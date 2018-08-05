@@ -4,13 +4,26 @@ import Dislike from "../images/thumb-down-outline-symbol.svg"
 import Fade from "@material-ui/core/es/Fade/Fade";
 import SausagePurple from "../images/sausage-icon-purple.svg"
 
+import egg from "../images/egg.png"
+import kitkat from "../images/kitkat.jpeg"
+import heinzbeans from "../images/heinz.png"
+import peanutbutter from "../images/peanutbutter.jpeg"
+import chocolatepowder from "../images/chocolatepowder.png"
+
+const products = {
+    100:heinzbeans,
+    101:egg,
+    102:kitkat,
+    103:chocolatepowder,
+    104:peanutbutter
+}
 class ItemBlock extends React.Component {
     state = {
         open: false,
     }
 
     render() {
-        const {seller,food_name,expiry_date,units,price} = this.props
+        const {qr_code,count, seller,food_name,expiry_date,units,price} = this.props;
         return (
             <div style={{
                 display: "flex",
@@ -29,7 +42,8 @@ class ItemBlock extends React.Component {
                  onClick={()=>this.setState({open:!this.state.open})}
             >
                 <div style={{display: 'flex', width: "100%"}}>
-                    <div
+                    <img
+                        src={products[qr_code]}
                         style={{
                             background: "#000",
                             width: 50,
@@ -42,15 +56,15 @@ class ItemBlock extends React.Component {
                         }}
                     />
                     <div
-                        style={{display: "flex", flexDirection: "column", height: 45, justifyContent: "space-between"}}>
-                        <div style={{color: "#515961"}}>
-                            <span style={{color:'#5d1ebe',fontWeight:800,marginRight:5}}>${price}</span>
-                            {food_name} x {units}
+                        style={{display: "flex", flexDirection: "column", height: 45, justifyContent: "space-between", flex: 1}}>
+                        <div style={{color: "#515961", display: 'flex', marginRight: 8, width: '100%'}}>
+                            {food_name} ({count} {units})
+                            <div style={{ flex: 1 }} />
+                            <span style={{color:'#0b54ff',fontWeight:800,marginRight:5}}>${price}</span>
                         </div>
                         <div style={{fontSize: 14, color: "#d4d5d8"}}>{seller}</div>
                     </div>
-                    <div style={{flex: 1}}/>
-                    <div style={{color: "#5d1ebe", fontSize: 10, marginRight: 20}}>
+                    <div style={{color: "#5d1ebe", fontSize: 10, marginLeft: 10, marginRight: 20}}>
                         2 Days
                     </div>
                 </div>
