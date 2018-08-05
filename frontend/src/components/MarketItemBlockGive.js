@@ -1,7 +1,7 @@
 import React from "react"
 import ShoppingBasket from "../images/shopping-basket.svg"
 import Dislike from "../images/thumb-down-outline-symbol.svg"
-import Fade from "@material-ui/core/es/Fade/Fade";
+import Fade from "@material-ui/core/Fade/Fade";
 import SausagePurple from "../images/sausage-icon-purple.svg"
 
 class ItemBlock extends React.Component {
