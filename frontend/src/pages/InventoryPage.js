@@ -41,7 +41,7 @@ class HomePage extends Component {
 
     componentDidMount() {
         setTimeout(() => this.setState({ ready: true }), 1000);
-        this.socket = io('http://localhost:3300');
+        this.socket = io('http://172.16.96.85:3300');
         this.socket.emit('getFoods', this.props.profile.name);
         this.socket.on('getFoods', ({ rows }) => {
             this.setState({ foods: rows });
