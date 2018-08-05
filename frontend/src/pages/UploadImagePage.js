@@ -12,7 +12,6 @@ import Processed from '../images/processed.png';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 
-
 const FOOD = [
     {
         qr_code: 100,

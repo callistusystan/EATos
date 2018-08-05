@@ -28,9 +28,10 @@ io.on('connection', client => {
     client.on('createAcc', createAcc);
     client.on('getFoods', (args) => {
         getFoods(args)
-            .then(({ rows }) => {
-                client.emit('getFoods', rows);
-            }).catch(err => console.log('getfooderr', err));
+        .then(res => {
+            console.log(res);
+            client.emit('getFoods', res);
+        });
     });
     client.on('getSales', getSales);
     client.on('createSale', createSale);
