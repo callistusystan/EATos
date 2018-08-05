@@ -32,7 +32,7 @@ class SignInPage extends Component {
     renderLoading = () => {
         return (
             <LoadingView>
-                <GridLoader color='#ffb432' loading={!this.state.ready}/>
+                <GridLoader color='#3B3B98' loading={!this.state.ready}/>
             </LoadingView>
         );
     };
