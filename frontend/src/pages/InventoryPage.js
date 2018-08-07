@@ -131,6 +131,7 @@ class HomePage extends Component {
                         food_amount={`${food.count} ${food.units}`}
                         handleOnSell={this.handleOnSell}
                         handleOnGive={this.handleOnGive}
+                        day={'4 days'}
                     />))}
             </div>
         );

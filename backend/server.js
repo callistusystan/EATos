@@ -18,6 +18,8 @@ const eos = EOS(EOS_CONFIG.clientConfig);
 var port = process.env.PORT || 3300;
 
 var SALES = [];
+
+var SALE_ID = 500;
 var NAME_TO_SOCKET = {};
 
 getSales();
@@ -61,6 +63,7 @@ function getSales() {
         scope: EOS_CONFIG.contractName,
         table:'sales',
         json: true,
+        limit: 12412984124
     }).then(({ rows }) => {
         SALES = rows;
         console.log('GOT SALES', SALES);
@@ -111,12 +114,12 @@ function createAcc(accountName, callback) {
 
 function createSale(args) {
     const { seller, type_of_sale, qr_code, count, price, description } = args;
-    console.log('CREATING SALES', args);
+    console.log('CREATING SALES', args, SALE_ID);
     eos.contract(EOS_CONFIG.contractName).then((contract) => {
         contract.createsale(
             {
                 seller: seller || 'callistus',
-                sale_id: SALES.length+1,
+                sale_id: SALE_ID,
                 type_of_sale,
                 qr_code,
                 count,
@@ -127,6 +130,7 @@ function createSale(args) {
         ).then(res => {
             getSales();
             getFoods(seller);
+            SALE_ID++;
         }).catch(err => {
             console.log(err);
         });

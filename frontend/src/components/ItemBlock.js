@@ -62,7 +62,7 @@ class ItemBlock extends React.Component {
                     <div style={{color: "#515961", marginRight: 8}}>{food_name}<br/><span style={{ fontSize: 14 }}>{food_amount}</span></div>
                     <div style={{flex: 1}}/>
                     <div style={{color: "#5d1ebe", fontSize: 10, marginRight: 20}}>
-                        2 Days
+                        {this.props.day || '2 Days'}
                     </div>
                 </div>
                 {this.state.open&&

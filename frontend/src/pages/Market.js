@@ -125,6 +125,7 @@ class HomePage extends Component {
                         count={sale.count}
                         seller={sale.seller}
                         food_name={sale.food_name}
+                        day={'3 days'}
                     />
                 )}
             </div>

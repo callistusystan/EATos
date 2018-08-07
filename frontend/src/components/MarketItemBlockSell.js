@@ -65,7 +65,8 @@ class ItemBlock extends React.Component {
                         <div style={{fontSize: 14, color: "#d4d5d8", marginRight: 8}}>{seller}</div>
                     </div>
                     <div style={{color: "#5d1ebe", fontSize: 10, marginLeft: 10, marginRight: 20}}>
-                        2 Days
+
+                        {this.props.day || '2 Days'}
                     </div>
                 </div>
                 {this.state.open&&
