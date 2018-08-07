@@ -22,4 +22,3 @@ This project was built in 26 hours during the EOS Global Hackathon Sydney 2018.
 <img src="/screenshots/screenshot5.png" width="50%"><img src="/screenshots/screenshot6.png" width="50%">
 <img src="/screenshots/screenshot5.png" width="50%"><img src="/screenshots/screenshot6.png" width="50%">
 <img src="/screenshots/screenshot7.png" width="50%"><img src="/screenshots/screenshot8.png" width="50%">
-<img src="/screenshots/screenshot9.png" width="50%">
